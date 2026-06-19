@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GovLayer - EU AI Act Compliance für Unternehmen</title>
+<meta name="description" content="GovLayer hilft Unternehmen beim Nachweis der EU AI Act Compliance. KI-Inventar, Bias-Check, Compliance-Report. Einmalkauf oder Jahresabo.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400&display=swap');
+:root{
+  --navy:#1B2A4A;--teal:#0097A7;--teal2:#00BCD4;
+  --white:#fff;--off:#F7F9FC;--muted:#64748B;--border:#E2E8F0;
+  --green:#10B981;--amber:#F59E0B;--red:#EF4444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Manrope',sans-serif;color:#1A202C;overflow-x:hidden}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(27,42,74,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,151,167,0.15);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:62px}
+.nav-logo img{height:34px}
+.nav-links{display:flex;align-items:center;gap:22px}
+.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;font-weight:500}
+.nav-links a:hover{color:white}
+.nav-cta{background:var(--teal);color:white;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none}
+.nav-cta:hover{background:var(--teal2)}
+
+.hero{background:var(--navy);padding:80px 5% 72px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-60px;right:-60px;width:480px;height:480px;background:radial-gradient(circle,rgba(0,151,167,0.12) 0%,transparent 70%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1060px}
+.hero-tag{font-size:11px;font-weight:700;color:var(--teal2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(30px,4vw,48px);color:white;line-height:1.12;margin-bottom:14px}
+.hero h1 em{color:var(--teal2);font-style:italic}
+.hero p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:28px;max-width:400px}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.btn-teal{background:var(--teal);color:white;padding:12px 22px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;white-space:nowrap}
+.btn-teal:hover{background:var(--teal2)}
+.btn-ghost{color:white;padding:12px 22px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .2s;white-space:nowrap}
+.btn-ghost:hover{border-color:var(--teal2);color:var(--teal2)}
+.hero-micro{display:flex;gap:14px;flex-wrap:wrap}
+.hero-micro span{font-size:11.5px;color:rgba(0,188,212,0.7);font-weight:600}
+
+.sc{background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.2);border-radius:14px;padding:22px}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.sc-lbl{font-size:10px;color:rgba(255,255,255,0.35);margin-bottom:3px}
+.sc-org{font-size:13px;font-weight:700;color:white}
+.sc-num{font-family:'DM Mono',monospace;font-size:30px;font-weight:700;color:var(--teal2);line-height:1}
+.sc-sub{font-size:10px;color:rgba(255,255,255,0.3);text-align:right}
+.sc-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.sc-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:12px;font-weight:500}
+.done{background:rgba(16,185,129,0.1);color:#6EE7B7}
+.doing{background:rgba(245,158,11,0.1);color:#FCD34D}
+.miss{background:rgba(239,68,68,0.08);color:#FCA5A5}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dg{background:var(--green)}.da{background:var(--amber)}.dr{background:var(--red)}
+.sc-btn{width:100%;padding:10px;background:var(--teal);color:white;border:none;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif}
+
+.trust{background:white;border-bottom:1px solid var(--border);padding:14px 5%;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.trust-item{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
+
+section{padding:64px 5%}
+.s-tag{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.2vw,36px);color:var(--navy);margin-bottom:10px;line-height:1.15}
+
+.real{background:var(--off)}
+.real-inner{max-width:860px;margin:0 auto}
+.real-text{font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:36px;max-width:620px}
+.real-text strong{color:var(--navy)}
+.real-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.real-card{background:white;border:1px solid var(--border);border-radius:10px;padding:20px}
+.real-card-icon{font-size:20px;margin-bottom:10px}
+.real-card-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.real-card-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+.vs{background:white}
+.vs-inner{max-width:840px;margin:0 auto}
+.vs-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+.vs-card{border-radius:12px;padding:26px}
+.vs-bad{background:var(--off);border:1px solid #FCA5A5}
+.vs-good{background:var(--navy);border:1px solid var(--teal)}
+.vs-head{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:16px}
+.vs-bad .vs-head{color:var(--red)}
+.vs-good .vs-head{color:var(--teal2)}
+.vs-items{display:flex;flex-direction:column;gap:9px}
+.vs-item{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.5}
+.vs-bad .vs-item{color:#7F1D1D}
+.vs-good .vs-item{color:rgba(255,255,255,0.72)}
+
+.steps{background:var(--off)}
+.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:32px;position:relative}
+.step-grid::before{content:'';position:absolute;top:23px;left:13%;right:13%;height:2px;background:linear-gradient(90deg,var(--teal),var(--teal2));z-index:0}
+.step{text-align:center;position:relative;z-index:1}
+.step-circle{width:46px;height:46px;border-radius:50%;background:var(--navy);border:2.5px solid var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:18px}
+.step-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.step-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.step-badge{display:inline-block;font-size:10px;color:var(--teal);font-weight:700;background:rgba(0,151,167,0.08);padding:2px 7px;border-radius:7px;margin-top:5px}
+
+.includes{background:white}
+.inc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:32px}
+.inc{background:var(--off);border:1px solid var(--border);border-radius:9px;padding:18px;transition:border-color .2s}
+.inc:hover{border-color:var(--teal)}
+.inc-icon{font-size:18px;margin-bottom:8px}
+.inc-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
+.inc-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.inc-art{font-size:10px;color:var(--teal);font-weight:700;margin-top:5px;font-family:'DM Mono',monospace}
+
+.pricing{background:var(--navy);padding:64px 5%}
+.pricing .s-tag{color:var(--teal2)}
+.pricing .s-title{color:white}
+.pricing-sub{font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:36px;line-height:1.65;max-width:520px}
+.price-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:620px}
+.price{background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.18);border-radius:14px;padding:28px;position:relative}
+.price.feat{background:rgba(0,151,167,0.1);border-color:var(--teal);box-shadow:0 8px 28px rgba(0,151,167,0.18)}
+.pbadge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;font-size:9.5px;font-weight:700;padding:3px 12px;border-radius:9px;white-space:nowrap;text-transform:uppercase;letter-spacing:0.5px}
+.pname{font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.pamt{font-family:'DM Serif Display',serif;font-size:38px;color:white;line-height:1}
+.pmo{font-size:11.5px;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.ptag{font-size:12px;color:var(--teal2);font-weight:600;background:rgba(0,151,167,0.12);padding:5px 10px;border-radius:6px;display:inline-block;margin-bottom:18px;line-height:1.4}
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.pfeat{font-size:12px;color:rgba(255,255,255,0.58);display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.pfeat::before{content:'✓';color:var(--teal2);font-weight:700;flex-shrink:0}
+.pbtn{display:block;text-align:center;padding:11px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:'Manrope',sans-serif;width:100%;transition:background .2s}
+.pbo{border:1px solid rgba(255,255,255,0.2);color:white;background:transparent}
+.pbo:hover{border-color:var(--teal2);color:var(--teal2)}
+.pbt{background:var(--teal);color:white}
+.pbt:hover{background:var(--teal2)}
+.price-footnote{font-size:12px;color:rgba(255,255,255,0.3);margin-top:20px;line-height:1.6;max-width:500px}
+
+.faq{background:var(--off);padding:56px 5%}
+.faq-inner{max-width:620px;margin:0 auto}
+.faq-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);color:var(--navy);text-align:center;margin-bottom:28px}
+.fi{border-bottom:1px solid var(--border);padding:16px 0;cursor:pointer}
+.fq{font-size:13.5px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.fa{font-size:13px;color:var(--muted);line-height:1.7;margin-top:10px;display:none}
+.fi.open .fa{display:block}
+.fi.open .arr{transform:rotate(180deg)}
+.arr{color:var(--teal);flex-shrink:0;transition:transform .2s}
+
+.cta-sec{background:var(--teal);padding:52px 5%;text-align:center}
+.cta-sec h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,34px);color:white;margin-bottom:10px}
+.cta-sec p{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:24px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.bw{background:white;color:var(--teal);padding:12px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none}
+.bw:hover{background:var(--off)}
+.bow{background:transparent;color:white;padding:12px 24px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;border:2px solid rgba(255,255,255,0.35)}
+.bow:hover{border-color:white}
+
+.iadm-bar{background:var(--navy);padding:26px 5%;text-align:center;border-top:1px solid rgba(0,151,167,0.1)}
+.iadm-inner{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.14);padding:10px 20px;border-radius:9px}
+.iadm-img{height:30px;object-fit:contain}
+.iadm-div{width:1px;height:28px;background:rgba(255,255,255,0.1)}
+.iadm-info strong{display:block;font-size:11.5px;color:white;font-weight:600}
+.iadm-info span{font-size:10px;color:rgba(255,255,255,0.28)}
+footer{background:var(--navy);padding:18px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(255,255,255,0.05)}
+.fl{font-size:11px;color:rgba(255,255,255,0.22)}
+.fl strong{color:rgba(255,255,255,0.4)}
+.flinks{display:flex;gap:16px}
+.flinks a{font-size:11px;color:rgba(255,255,255,0.22);text-decoration:none}
+.flinks a:hover{color:var(--teal2)}
+
+@media(max-width:860px){
+  .hero-inner,.real-cards,.vs-grid,.step-grid,.inc-grid,.price-grid{grid-template-columns:1fr}
+  .step-grid::before{display:none}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ4IiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTQ4IDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNyAzLjUgTDI5IDggTDI5IDIwIEMyOSAyNy41IDIzIDMyLjUgMTcgMzQuNSBDMTEgMzIuNSA1IDI3LjUgNSAyMCBMNSA4IFoiIGZpbGw9InJnYmEoMCwxNTEsMTY3LDAuMTIpIiBzdHJva2U9IiMwMDk3QTciIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPGxpbmUgeDE9IjkiIHkxPSIxNSIgeDI9IjI1IiB5Mj0iMTUiIHN0cm9rZT0iIzAwOTdBNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI5IiB5MT0iMjAuNSIgeDI9IjI1IiB5Mj0iMjAuNSIgc3Ryb2tlPSIjMDBCQ0Q0IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjkiIHkxPSIyNiIgeDI9IjIxIiB5Mj0iMjYiIHN0cm9rZT0icmdiYSgwLDE4OCwyMTIsMC40KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjM3IiB5PSIyNyIgZm9udC1mYW1pbHk9Ik1hbnJvcGUsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIxOSIgZmlsbD0id2hpdGUiIGxldHRlci1zcGFjaW5nPSItMC40Ij5Hb3Y8dHNwYW4gZmlsbD0iIzAwQkNENCI+TGF5ZXI8L3RzcGFuPjwvdGV4dD4KPC9zdmc+" alt="GovLayer"></a>
+  <div class="nav-links">
+    <a href="#warum">Warum jetzt</a>
+    <a href="#schritte">So geht es</a>
+    <a href="#preise">Preise</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#preise" class="nav-cta">Jetzt starten</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Nachweissoftware für das EU KI-Gesetz</div>
+      <h1>Erfüllen Sie Ihre Pflicht<br>nach dem <em>EU KI-Gesetz.</em></h1>
+      <p style="font-size:15px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:24px;max-width:410px">Vollständig dokumentiert, geprüft und jederzeit abrufbar. Vermeiden Sie Bußgelder.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:28px">
+        <div style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.6)"><span style="color:var(--teal2);font-weight:700">✓</span>GovLayer selbst nutzen, Schritt für Schritt von uns geführt</div>
+        <div style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:rgba(255,255,255,0.6)"><span style="color:var(--teal2);font-weight:700">✓</span>Oder unser KI-Beauftragter übernimmt es für Sie</div>
+      </div>
+      <div class="hero-actions">
+        <a href="#wege" class="btn-teal">So geht es</a>
+        <a href="#schritte" class="btn-ghost">Was ist enthalten</a>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sc-top">
+        <div>
+          <div class="sc-lbl">Compliance-Status</div>
+          <div class="sc-org">Müller und Partner GmbH</div>
+        </div>
+        <div>
+          <div class="sc-num">67%</div>
+          <div class="sc-sub">compliant</div>
+        </div>
+      </div>
+      <div class="sc-list">
+        <div class="sc-row done"><div class="dot dg"></div>KI-Systeme dokumentiert</div>
+        <div class="sc-row done"><div class="dot dg"></div>Risikoklasse bewertet</div>
+        <div class="sc-row doing"><div class="dot da"></div>Bias-Check läuft</div>
+        <div class="sc-row miss"><div class="dot dr"></div>Transparenzhinweise fehlen</div>
+        <div class="sc-row miss"><div class="dot dr"></div>Schulungsnachweise fehlen</div>
+      </div>
+      <button class="sc-btn">📥 Compliance-Report herunterladen</button>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trust-item">🏛️ EU KI-Gesetz 2024/1689</div>
+  <div class="trust-item">🎓 Powered by IADM Ltd</div>
+  <div class="trust-item">⚖️ Art. 4, 9, 10, 13, 26</div>
+  <div class="trust-item">🇩🇪 Für europäische Unternehmen</div>
+  <div class="trust-item">🔒 Datenschutzkonform</div>
+</div>
+
+<section style="background:white;padding:56px 5%" id="wege">
+  <div style="max-width:820px;margin:0 auto">
+    <div class="s-tag" style="text-align:center">Wie es funktioniert</div>
+    <h2 class="s-title" style="text-align:center;margin-bottom:32px">Zwei Wege zum Nachweis.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <div style="background:var(--off);border:1px solid var(--border);border-radius:12px;padding:28px">
+        <div style="font-size:28px;margin-bottom:12px">🖥️</div>
+        <div style="font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px">Selbst machen</div>
+        <div style="font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:18px">Sie loggen sich ein, tragen Ihre KI-Werkzeuge ein und arbeiten die Checkliste Schritt für Schritt ab. GovLayer erklärt jeden Schritt verständlich und erstellt alle Dokumente automatisch.</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+          <div style="font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>Kein technisches Wissen nötig</div>
+          <div style="font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>In wenigen Tagen fertig</div>
+          <div style="font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>Jahresabo oder Einmalkauf</div>
+        </div>
+        <a href="#preise" style="display:block;text-align:center;background:var(--teal);color:white;padding:11px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none">Jetzt selbst starten</a>
+      </div>
+
+      <div style="background:var(--navy);border:1px solid rgba(0,151,167,0.3);border-radius:12px;padding:28px">
+        <div style="font-size:28px;margin-bottom:12px">👩‍💼</div>
+        <div style="font-size:16px;font-weight:700;color:white;margin-bottom:8px">Experte übernimmt es</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:18px">Ein IADM-Experte führt die gesamte Bestandsaufnahme für Ihr Unternehmen durch und liefert Ihnen den fertigen Nachweis. Sie müssen sich um nichts kümmern.</div>
+        <div style="display:flex;flex-direction:column;gap:7px;margin-bottom:20px">
+          <div style="font-size:12.5px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Komplett unkompliziert</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Persönliche Beratung inklusive</div>
+          <div style="font-size:12.5px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Fertiger Nachweis in 1 bis 2 Wochen</div>
+        </div>
+        <a href="#" style="display:block;text-align:center;background:var(--teal);color:white;padding:11px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none">Beratungstermin buchen</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="real" id="warum">
+  <div class="real-inner">
+    <div class="s-tag">Warum jetzt</div>
+    <h2 class="s-title">Die Frist wurde verschoben. Der Druck bleibt.</h2>
+    <p class="real-text">Der EU AI Act gilt seit August 2024. Die ursprüngliche Hochrisiko-Frist wurde auf Dezember 2027 verschoben. Das klingt entspannt. Aber <strong>Kunden, Partner und Investoren fragen bereits heute</strong> nach Ihrem Compliance-Status. Wer keine Antwort hat, verliert Aufträge.</p>
+    <div class="real-cards">
+      <div class="real-card">
+        <div class="real-card-icon">🤝</div>
+        <div class="real-card-title">Kunden fragen nach</div>
+        <div class="real-card-desc">Größere Unternehmen verlangen von ihren Lieferanten zunehmend Nachweise über den KI-Einsatz. Das ist heute schon Realität.</div>
+      </div>
+      <div class="real-card">
+        <div class="real-card-icon">📋</div>
+        <div class="real-card-title">Ausschreibungen schließen aus</div>
+        <div class="real-card-desc">Öffentliche Auftraggeber und Konzerne nehmen KI-Governance in ihre Lieferantenbewertung auf. Wer nicht dokumentiert, verliert.</div>
+      </div>
+      <div class="real-card">
+        <div class="real-card-icon">🛡️</div>
+        <div class="real-card-title">Früh ist besser als spät</div>
+        <div class="real-card-desc">Wer jetzt dokumentiert, hat den Nachweis parat wenn er gebraucht wird und muss nicht unter Zeitdruck nacharbeiten.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vs">
+  <div class="vs-inner">
+    <div class="s-tag">Der Unterschied</div>
+    <h2 class="s-title">Was Sie sonst tun müssten.</h2>
+    <div class="vs-grid">
+      <div class="vs-card vs-bad">
+        <div class="vs-head">Ohne GovLayer</div>
+        <div class="vs-items">
+          <div class="vs-item"><span>📚</span>200 Seiten EU AI Act selbst durcharbeiten</div>
+          <div class="vs-item"><span>⚖️</span>Anwalt beauftragen, ab 300 Euro die Stunde</div>
+          <div class="vs-item"><span>📊</span>Bias-Berechnungen selbst durchführen</div>
+          <div class="vs-item"><span>📄</span>Alle Dokumente von Grund auf erstellen</div>
+          <div class="vs-item"><span>🕐</span>Monate Aufwand</div>
+        </div>
+      </div>
+      <div class="vs-card vs-good">
+        <div class="vs-head">Mit GovLayer</div>
+        <div class="vs-items">
+          <div class="vs-item"><span>✓</span>Schritt für Schritt geführt, in einfacher Sprache</div>
+          <div class="vs-item"><span>✓</span>Alle Dokumente werden automatisch erstellt</div>
+          <div class="vs-item"><span>✓</span>Bias-Check: CSV hochladen, Ergebnis sofort</div>
+          <div class="vs-item"><span>✓</span>Fertiger Compliance-Report zum Download</div>
+          <div class="vs-item"><span>✓</span>In wenigen Tagen erledigt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps" id="schritte">
+  <div class="s-tag" style="text-align:center">So funktioniert es</div>
+  <h2 class="s-title" style="text-align:center;margin-bottom:4px">Vier Schritte. Fertig.</h2>
+  <div class="step-grid">
+    <div class="step">
+      <div class="step-circle">🗂️</div>
+      <div class="step-title">KI-Tools eintragen</div>
+      <div class="step-desc">GovLayer bewertet das Risiko automatisch.</div>
+      <div class="step-badge">5 Min.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">🔍</div>
+      <div class="step-title">Lücken sehen</div>
+      <div class="step-desc">Rot ist dringend. Grün ist erledigt.</div>
+      <div class="step-badge">10 Min.</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">📋</div>
+      <div class="step-title">Dokumente erstellen</div>
+      <div class="step-desc">GovLayer generiert alles automatisch.</div>
+      <div class="step-badge">Wenige Tage</div>
+    </div>
+    <div class="step">
+      <div class="step-circle">📁</div>
+      <div class="step-title">Report laden</div>
+      <div class="step-desc">Ein PDF für jeden Prüfer. Jederzeit.</div>
+      <div class="step-badge">1 Klick</div>
+    </div>
+  </div>
+</section>
+
+<section class="includes">
+  <div class="s-tag" style="text-align:center">Was enthalten ist</div>
+  <h2 class="s-title" style="text-align:center;margin-bottom:4px">Alles was der Gesetzgeber verlangt.</h2>
+  <div class="inc-grid">
+    <div class="inc"><div class="inc-icon">⚠️</div><div class="inc-title">Risikoklassifizierung</div><div class="inc-desc">Automatisch für jedes KI-Tool.</div><div class="inc-art">Art. 6 und Anhang III</div></div>
+    <div class="inc"><div class="inc-icon">🔍</div><div class="inc-title">Gap-Analyse</div><div class="inc-desc">Was fehlt. Was dringend ist. Was erledigt ist.</div><div class="inc-art">Art. 9</div></div>
+    <div class="inc"><div class="inc-icon">⚖️</div><div class="inc-title">Bias-Check</div><div class="inc-desc">CSV hochladen, Ergebnis sofort.</div><div class="inc-art">Art. 9 und 10</div></div>
+    <div class="inc"><div class="inc-icon">📢</div><div class="inc-title">Mitarbeitermitteilungen</div><div class="inc-desc">GovLayer schreibt sie für Sie.</div><div class="inc-art">Art. 13</div></div>
+    <div class="inc"><div class="inc-icon">🎓</div><div class="inc-title">Schulungsnachweise</div><div class="inc-desc">Hochladen und exportieren.</div><div class="inc-art">Art. 4</div></div>
+    <div class="inc"><div class="inc-icon">📁</div><div class="inc-title">Compliance-Report</div><div class="inc-desc">Alles in einem PDF. Jederzeit abrufbar.</div><div class="inc-art">Alle Artikel</div></div>
+  </div>
+</section>
+
+<section class="pricing" id="preise">
+  <div class="s-tag">Preise</div>
+  <h2 class="s-title">Einmalig kaufen oder jährlich abonnieren.</h2>
+  <p class="pricing-sub">GovLayer funktioniert als Einmalkauf. Wer möchte dass seine Nachweise automatisch aktuell bleiben wenn der EU AI Act sich weiterentwickelt, wählt das Jahresabo.</p>
+  <div class="price-grid">
+    <div class="price">
+      <div class="pname">Einmalkauf</div>
+      <div class="pamt">299 €</div>
+      <div class="pmo">einmalig</div>
+      <div class="ptag">Einmal zahlen. Für immer nutzen.</div>
+      <ul class="pfeats">
+        <li class="pfeat">Vollständiger Compliance-Check</li>
+        <li class="pfeat">Alle 6 Module inklusive</li>
+        <li class="pfeat">Bias-Check mit CSV-Upload</li>
+        <li class="pfeat">AI Act Compliance-Report PDF</li>
+        <li class="pfeat">Bis zu 5 KI-Systeme</li>
+        <li class="pfeat">1 Benutzer</li>
+      </ul>
+      <button class="pbtn pbo" onclick="document.querySelector('.cta-sec').scrollIntoView({behavior:'smooth'})">Jetzt kaufen</button>
+    </div>
+    <div class="price feat">
+      <div class="pbadge">Empfohlen</div>
+      <div class="pname">Jahresabo</div>
+      <div class="pamt">69 €</div>
+      <div class="pmo">pro Monat</div>
+      <div class="ptag">Immer aktuell wenn der EU AI Act sich ändert.</div>
+      <ul class="pfeats">
+        <li class="pfeat">Alles aus dem Einmalkauf</li>
+        <li class="pfeat">Unbegrenzte KI-Systeme</li>
+        <li class="pfeat">Bis zu 5 Benutzer</li>
+        <li class="pfeat">Automatische Updates</li>
+        <li class="pfeat">Neue Module sofort inklusive</li>
+        <li class="pfeat">Prioritäts-Support</li>
+      </ul>
+      <button class="pbtn pbt" onclick="document.querySelector('.cta-sec').scrollIntoView({behavior:'smooth'})">14 Tage kostenlos testen</button>
+    </div>
+  </div>
+  <p class="price-footnote">Das Jahresabo lohnt sich weil der EU AI Act sich weiterentwickelt. Neue Leitlinien, neue Fristen, neue Pflichten. GovLayer hält Sie automatisch auf dem neuesten Stand.</p>
+</section>
+
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <h2 class="faq-title">Häufige Fragen</h2>
+    <div class="fi open" onclick="this.classList.toggle('open')">
+      <div class="fq">Kann ich das nicht selbst machen? <span class="arr">▼</span></div>
+      <div class="fa">Ja, technisch schon. Aber der EU AI Act umfasst über 200 Seiten. Die richtigen Artikel für Ihr Unternehmen herauszufinden, alle Dokumente zu erstellen und alles prüfungssicher zu dokumentieren dauert Monate. GovLayer macht das in Tagen, für weniger als eine Stunde Anwaltskosten.</div>
+    </div>
+    <div class="fi" onclick="this.classList.toggle('open')">
+      <div class="fq">Die Frist wurde doch verschoben. Warum jetzt handeln? <span class="arr">▼</span></div>
+      <div class="fa">Die gesetzliche Frist für Hochrisiko-KI wurde auf Dezember 2027 verschoben. Aber Kunden, Partner und Investoren fragen schon heute. Wer keinen Nachweis hat verliert Aufträge, noch bevor die Behörden überhaupt tätig werden.</div>
+    </div>
+    <div class="fi" onclick="this.classList.toggle('open')">
+      <div class="fq">Was bekomme ich am Ende genau? <span class="arr">▼</span></div>
+      <div class="fa">Einen vollständigen AI Act Compliance-Report als PDF. Mit Ihrem KI-Inventar, Risikobewertungen, Bias-Ergebnissen, Schulungsnachweisen und mehr. Das Dokument, das ein Prüfer, Auditor oder Kunde von Ihnen verlangen würde.</div>
+    </div>
+    <div class="fi" onclick="this.classList.toggle('open')">
+      <div class="fq">Wann macht das Jahresabo mehr Sinn als der Einmalkauf? <span class="arr">▼</span></div>
+      <div class="fa">Wenn Sie mehr als 5 KI-Systeme nutzen, mehrere Benutzer brauchen oder sichergehen wollen dass Ihre Nachweise aktuell bleiben wenn der EU AI Act sich weiterentwickelt. Wer einmalig kauft hat die Grundlage. Wer abonniert bleibt dauerhaft abgesichert.</div>
+    </div>
+    <div class="fi" onclick="this.classList.toggle('open')">
+      <div class="fq">Bin ich überhaupt betroffen? <span class="arr">▼</span></div>
+      <div class="fa">Wenn Ihr Unternehmen KI bei Bewerbungen, Leistungsbeurteilungen oder Personalentscheidungen einsetzt, dann ja. Das gilt als Hochrisiko-KI. Auch wer KI in der Kundeninteraktion einsetzt hat Transparenzpflichten ab August 2026.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec">
+  <h2>Jetzt compliant werden.</h2>
+  <p>Einmalig oder als Jahresabo. Kein Vorwissen nötig.</p>
+  <div class="cta-btns">
+    <a href="#" class="bw">Jetzt kaufen, 299 €</a>
+    <a href="#" class="bow">14 Tage kostenlos testen</a>
+  </div>
+</section>
+
+<div class="iadm-bar">
+  <div class="iadm-inner">
+    <img src="data:image/jpeg;base64,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trbXSOWyfTmSr5dNU36uts3C6lLHtEfCMAgZz6crrwvuMNmoDZmEtfkzFjASX5/4vMo2JpRIZBK8PPW7iOT7VyhqKiAOEM8sQd84MeRn6kzD4NlSUbWWXRrRtJptr1vf7EvqGuN+ncxkZrG0IMLeWA/zZXUqX3GTTU7rqxzT0zA0uaGuLc8+SwVDNAasPr5KksDcNfG7wmnsxld253Kmdb3UdNJVVDpHh0s1Q7JIHUB5lnNdET4bUpVadNK9suttyW+zvp26kjnl6GsDGQV0tJ0WBHFEwwFuO/Kw5rpqHTNNJQvMfFUPAJaCeHJOPcsCyqqmQmFlTM2I8iwPIafYvmZJDGIy9xYDkNzyB9Cw5kihsPJZTaaTT3b7J7/XUmc9dO3UlNQjgFNNHmSPgGHFwJJK69p4IbM80gqhJ8ocJTTRtc/keQ59mMKLGeYyCQzSF7eQdxHI9qQ1E8Dy+GeSJx63McQT9SznMfA2qajGS3K+mjab3+/6EsZOwXmrmZTyRzMtznSCVgBc7kQSASOYxlY+SvqavTxrJ3h1TT1Y6OThAIyM46v9clgzPOZHyGaQveMOdxHLh5z2riHvEZjD3cBOS3PLPoWMxup7HUbNtNrL7LeuzvbsZvV1VPJPTwvkLo+gZJw4/wCIjmVglye98hBe9ziBgEnPJcV5buyywWGWGoRpLkERFglBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREB//9k=" alt="IADM" class="iadm-img">
+    <div class="iadm-div"></div>
+    <div class="iadm-info">
+      <strong>GovLayer ist eine Marke der IADM Ltd</strong>
+      <span>CPD-akkreditiert · Mitglied Nr. 021006 · iadm.academy</span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fl"><strong>GovLayer.solutions</strong> · Eine Marke der IADM Ltd · © 2026</div>
+  <div class="flinks">
+    <a href="#">Datenschutz</a>
+    <a href="#">Impressum</a>
+    <a href="https://www.iadm.academy">IADM Academy</a>
+  </div>
+</footer>
+
+<script>document.querySelectorAll('.fi').forEach(i=>i.addEventListener('click',()=>i.classList.toggle('open')));</script>
+</body>
+</html>
