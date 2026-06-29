@@ -1,432 +1,875 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GovLayer — EU AI Act Compliance Platform for Organisations</title>
-<meta name="description" content="GovLayer helps organisations comply with the EU AI Act. Register AI systems, run bias checks, track AI literacy, and download your AI Act Compliance Report. Built for SMEs in Europe.">
-<meta name="keywords" content="EU AI Act compliance, AI governance platform, AI Act compliance tool, bias check AI, Article 4 AI literacy, AI risk classification, EU AI Act SME, AI audit evidence, AI compliance software Europe">
+<title>GovLayer</title>
+<meta name="description" content="GovLayer sorgt dafür dass Ihr Unternehmen EU KI-Gesetz compliant bleibt. Monatlich. Automatisch. Ohne Aufwand.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap');
-:root {
-  --navy:#1B2A4A; --navy2:#152238; --teal:#0097A7; --teal2:#00BCD4;
-  --teal-bg:rgba(0,151,167,0.08); --white:#fff; --off:#F7F9FC;
-  --muted:#64748B; --border:#E2E8F0; --text:#1A202C;
-  --green:#10B981; --amber:#F59E0B; --red:#EF4444;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400&display=swap');
+:root{
+  --navy:#1a3a42;--teal:#0097A7;--teal2:#00BCD4;
+  --white:#fff;--off:#F4F7FA;--muted:#64748B;--border:#DDE4ED;
+  --green:#10B981;--amber:#F59E0B;--red:#EF4444;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Manrope',sans-serif;background:var(--white);color:var(--text);overflow-x:hidden}
+body{font-family:'Manrope',sans-serif;color:#1A202C;overflow-x:hidden}
+[data-lang]{display:none}
+[data-lang].active{display:block}
+[data-lang-inline]{display:none}
+[data-lang-inline].active{display:inline}
 
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(27,42,74,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,151,167,0.15);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:70px}
-.nav-logo img{height:40px}
-.nav-links{display:flex;align-items:center;gap:28px}
-.nav-links a{font-size:13px;color:rgba(255,255,255,0.55);text-decoration:none;font-weight:500;transition:color .2s}
-.nav-links a:hover{color:white}
-.nav-cta{background:var(--teal);color:white;padding:9px 20px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(20,50,58,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,151,167,0.15);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo img{height:36px}
+.nav-right{display:flex;align-items:center;gap:14px}
+.nav-contact{display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+.nav-contact-item{font-size:11px;color:rgba(255,255,255,0.45);text-decoration:none;font-weight:500;transition:color .2s}
+.nav-contact-item:hover{color:var(--teal2)}
+.lang-toggle{display:flex;background:rgba(255,255,255,0.08);border-radius:6px;overflow:hidden}
+.lang-btn{padding:5px 10px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.45);cursor:pointer;border:none;background:transparent;font-family:'Manrope',sans-serif;transition:all .2s}
+.lang-btn.active{background:var(--teal);color:white}
+.nav-cta{background:var(--teal);color:white;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
 .nav-cta:hover{background:var(--teal2)}
 
-.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;padding:120px 6% 80px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 60% 50%,rgba(0,151,167,0.1) 0%,transparent 70%)}
-.hero-grid{position:absolute;inset:0;opacity:0.025;background-image:linear-gradient(rgba(0,188,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,188,212,1) 1px,transparent 1px);background-size:50px 50px}
-.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;width:100%}
-.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(0,151,167,0.12);border:1px solid rgba(0,151,167,0.3);padding:5px 13px;border-radius:20px;margin-bottom:24px;font-size:11px;font-weight:700;color:var(--teal2);letter-spacing:1px;text-transform:uppercase}
-.hero-tag::before{content:'●';font-size:7px;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(34px,4.5vw,54px);color:white;line-height:1.12;margin-bottom:18px}
+/* HERO */
+.hero{background:#1a3a42;padding:80px 5% 72px;position:relative;overflow:hidden;min-height:88vh;display:flex;align-items:center}
+.hero-photo{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=1600&q=80&auto=format&fit=crop') center/cover no-repeat;opacity:0.45;z-index:0;filter:hue-rotate(180deg) saturate(1.2)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(160deg,rgba(15,45,55,0.88) 0%,rgba(20,65,80,0.75) 50%,rgba(25,75,90,0.55) 100%);z-index:0}
+.hero-glow{position:absolute;top:-80px;right:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(0,151,167,0.13) 0%,transparent 70%);pointer-events:none}
+.hero-grid-bg{position:absolute;inset:0;opacity:0.025;background-image:linear-gradient(rgba(0,188,212,1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,188,212,1) 1px,transparent 1px);background-size:48px 48px}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;max-width:1100px;margin:0 auto}
+.hero-tag{font-size:11px;font-weight:700;color:var(--teal2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,50px);color:white;line-height:1.12;margin-bottom:18px}
 .hero h1 em{color:var(--teal2);font-style:italic}
-.hero-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.75;margin-bottom:32px;max-width:440px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
-.btn-teal{background:var(--teal);color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
-.btn-teal:hover{background:var(--teal2);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .2s}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.65;margin-bottom:28px;max-width:420px}
+.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.hero-point{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,0.7)}
+.hero-point span{color:var(--teal2);font-weight:700;font-size:16px;flex-shrink:0}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-teal{background:var(--teal);color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;white-space:nowrap}
+.btn-teal:hover{background:var(--teal2)}
+.btn-ghost{color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;border:1px solid rgba(255,255,255,0.2);transition:all .2s;white-space:nowrap}
 .btn-ghost:hover{border-color:var(--teal2);color:var(--teal2)}
-.hero-proof{display:flex;align-items:center;gap:20px}
-.hero-proof-item{font-size:12px;color:rgba(255,255,255,0.35);display:flex;align-items:center;gap:6px}
-.hero-proof-item span{color:var(--teal2)}
 
-.hv{background:rgba(255,255,255,0.03);border:1px solid rgba(0,151,167,0.2);border-radius:16px;padding:24px}
-.hv-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px}
-.hv-org{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:3px}
-.hv-name{font-size:13px;font-weight:700;color:white}
-.hv-score-wrap{text-align:right}
-.hv-score{font-family:'DM Mono',monospace;font-size:28px;font-weight:700;color:var(--teal2);line-height:1}
-.hv-score-label{font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px}
-.hv-report{background:rgba(0,151,167,0.08);border:1px solid rgba(0,151,167,0.2);border-radius:8px;padding:12px 14px;margin-bottom:16px}
-.hv-report-title{font-size:10px;font-weight:700;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px}
-.hv-report-items{display:flex;flex-direction:column;gap:6px}
-.hv-ri{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,0.5)}
-.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+/* STATUS CARD */
+.status-card{background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.22);border-radius:16px;padding:24px}
+.sc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.sc-lbl{font-size:10px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px}
+.sc-org{font-size:13px;font-weight:700;color:white}
+.sc-score{font-family:'DM Mono',monospace;font-size:32px;font-weight:700;color:var(--teal2);line-height:1}
+.sc-score-sub{font-size:10px;color:rgba(255,255,255,0.3);text-align:right;margin-top:2px}
+.sc-email{background:rgba(0,151,167,0.1);border:1px solid rgba(0,151,167,0.2);border-radius:8px;padding:12px 14px;margin-bottom:14px}
+.sc-email-lbl{font-size:10px;font-weight:700;color:var(--teal2);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:6px}
+.sc-email-text{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.55}
+.sc-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.sc-row{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;font-size:12px;font-weight:500}
+.done{background:rgba(16,185,129,0.1);color:#6EE7B7}
+.doing{background:rgba(245,158,11,0.1);color:#FCD34D}
+.miss{background:rgba(239,68,68,0.08);color:#FCA5A5}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
 .dg{background:var(--green)}.da{background:var(--amber)}.dr{background:var(--red)}
-.hv-bars{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.hv-bl{display:flex;justify-content:space-between;font-size:10.5px;color:rgba(255,255,255,0.38);margin-bottom:3px}
-.hv-track{background:rgba(255,255,255,0.06);border-radius:3px;height:4px}
-.hv-fill{height:4px;border-radius:3px}
-.ft{background:linear-gradient(90deg,var(--teal),var(--teal2))}.fa{background:var(--amber)}.fr{background:var(--red)}
-.hv-download{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:white;padding:9px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;border:none;font-family:'Manrope',sans-serif;width:100%}
+.sc-btn{width:100%;padding:11px;background:var(--teal);color:white;border:none;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif}
 
-.trust{background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 6%;display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap}
-.trust-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600}
+/* TRUST */
+.trust{background:white;border-bottom:1px solid var(--border);padding:14px 5%;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.trust-item{font-size:12px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px}
 
-section{padding:84px 6%}
-.sl{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
-.st{font-family:'DM Serif Display',serif;font-size:clamp(27px,3.5vw,42px);color:var(--navy);line-height:1.15;margin-bottom:12px}
-.ss{font-size:15px;color:var(--muted);line-height:1.7;max-width:500px}
+/* SECTIONS */
+section{padding:64px 5%}
+.s-tag{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.s-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3.2vw,36px);color:var(--navy);margin-bottom:10px;line-height:1.15}
 
-.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
-.val-card{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:28px;position:relative;overflow:hidden}
-.val-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal2));transform:scaleX(0);transform-origin:left;transition:transform .3s}
-.val-card:hover::after{transform:scaleX(1)}
-.val-card:hover{border-color:var(--teal)}
-.val-icon{font-size:28px;margin-bottom:14px}
-.val-title{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px}
-.val-desc{font-size:13px;color:var(--muted);line-height:1.65}
-.val-highlight{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);font-weight:600;margin-top:12px}
+/* HOW */
+.how{background:var(--off)}
+.how-inner{max-width:960px;margin:0 auto}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:36px}
+.how-card{background:white;border:1px solid var(--border);border-radius:12px;padding:28px;position:relative}
+.how-card.featured{background:#1a3a42;border-color:var(--teal)}
+.how-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--teal);font-weight:700;margin-bottom:14px;letter-spacing:1px}
+.how-card.featured .how-num{color:var(--teal2)}
+.how-icon{font-size:26px;margin-bottom:12px}
+.how-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.how-card.featured .how-title{color:white}
+.how-desc{font-size:13px;color:var(--muted);line-height:1.65}
+.how-card.featured .how-desc{color:rgba(255,255,255,0.5)}
 
-.modules{background:var(--off)}
-.mod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
-.mod{background:white;border:1px solid var(--border);border-radius:10px;padding:20px;transition:all .2s}
-.mod:hover{border-color:var(--teal);box-shadow:0 4px 14px rgba(0,151,167,0.08)}
-.mod-icon{font-size:20px;margin-bottom:8px}
-.mod-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:3px}
-.mod-art{font-size:10px;font-family:'DM Mono',monospace;color:var(--teal);font-weight:600;margin-bottom:5px}
-.mod-desc{font-size:11.5px;color:var(--muted);line-height:1.55}
+/* WHAT YOU GET */
+.get{background:white}
+.get-inner{max-width:960px;margin:0 auto}
+.get-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:36px}
+.get-card{background:var(--off);border:1px solid var(--border);border-radius:10px;padding:20px;transition:border-color .2s}
+.get-card:hover{border-color:var(--teal)}
+.get-icon{font-size:20px;margin-bottom:10px}
+.get-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.get-desc{font-size:12px;color:var(--muted);line-height:1.6}
+.get-art{font-size:10px;color:var(--teal);font-weight:700;margin-top:6px;font-family:'DM Mono',monospace}
 
-.report-section{background:var(--navy)}
-.report-section .st{color:white}
-.report-section .ss{color:rgba(255,255,255,0.45)}
-.report-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:52px;align-items:center}
-.report-visual{background:rgba(255,255,255,0.03);border:1px solid rgba(0,151,167,0.2);border-radius:14px;padding:28px}
-.rv-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.07)}
-.rv-title{font-size:14px;font-weight:700;color:white}
-.rv-date{font-size:11px;color:rgba(255,255,255,0.3);font-family:'DM Mono',monospace}
-.rv-items{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-.rv-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(255,255,255,0.03);border-radius:7px;border:1px solid rgba(255,255,255,0.05)}
-.rv-item-left{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,0.7)}
-.rv-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px}
-.rb-done{background:rgba(16,185,129,0.15);color:var(--green)}
-.rb-prog{background:rgba(245,158,11,0.15);color:var(--amber)}
-.rb-miss{background:rgba(239,68,68,0.12);color:var(--red)}
-.rv-download{display:flex;align-items:center;gap:8px;background:var(--teal);color:white;padding:11px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;border:none;font-family:'Manrope',sans-serif;width:100%;justify-content:center}
-.report-text h3{font-family:'DM Serif Display',serif;font-size:26px;color:white;line-height:1.2;margin-bottom:16px}
-.report-text p{font-size:13.5px;color:rgba(255,255,255,0.45);line-height:1.75;margin-bottom:14px}
-.report-items{display:flex;flex-direction:column;gap:10px;margin-top:20px}
-.report-item{display:flex;align-items:center;gap:10px;font-size:13px;color:rgba(255,255,255,0.6)}
-.report-item::before{content:'✓';color:var(--teal2);font-weight:700;flex-shrink:0}
+/* PRICING */
+.pricing{background:linear-gradient(135deg,#1a3a42,#2a5a6a);padding:64px 5%}
+.pricing .s-tag{color:var(--teal2)}
+.pricing .s-title{color:white}
+.pricing-sub{font-size:14px;color:rgba(255,255,255,0.45);margin-bottom:36px;max-width:500px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px}
+.price{background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.18);border-radius:12px;padding:26px;position:relative}
+.price.feat{background:rgba(0,151,167,0.1);border-color:var(--teal);box-shadow:0 8px 28px rgba(0,151,167,0.2)}
+.pbadge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;font-size:9.5px;font-weight:700;padding:3px 12px;border-radius:9px;white-space:nowrap;text-transform:uppercase;letter-spacing:0.5px}
+.pname{font-size:10px;font-weight:700;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.pamt{font-family:'DM Serif Display',serif;font-size:36px;color:white;line-height:1}
+.pmo{font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:10px}
+.ptag{font-size:12px;color:var(--teal2);font-weight:600;background:rgba(0,151,167,0.12);padding:5px 10px;border-radius:6px;display:inline-block;margin-bottom:16px;line-height:1.4}
+.pfeats{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.pfeat{font-size:12px;color:rgba(255,255,255,0.55);display:flex;align-items:flex-start;gap:6px;line-height:1.4}
+.pfeat::before{content:'✓';color:var(--teal2);font-weight:700;flex-shrink:0}
+.pbtn{display:block;text-align:center;padding:11px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;border:none;font-family:'Manrope',sans-serif;width:100%;transition:all .2s}
+.pbo{border:1px solid rgba(255,255,255,0.2);color:white;background:transparent}
+.pbo:hover{border-color:var(--teal2);color:var(--teal2)}
+.pbt{background:var(--teal);color:white}
+.pbt:hover{background:var(--teal2)}
 
-.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-.pc{background:var(--off);border:1px solid var(--border);border-radius:12px;padding:28px;position:relative}
-.pc.feat{background:var(--navy);border-color:var(--teal);box-shadow:0 16px 48px rgba(0,151,167,0.15)}
-.pc.feat .pn,.pc.feat .pd,.pc.feat .pp{color:rgba(255,255,255,0.4)}
-.pc.feat .pa{color:white}
-.pc.feat .pf{color:rgba(255,255,255,0.6)}
-.pc.feat .pf::before{color:var(--teal2)}
-.fp{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--teal);color:white;font-size:10px;font-weight:700;padding:3px 12px;border-radius:10px;text-transform:uppercase;letter-spacing:0.8px;white-space:nowrap}
-.pn{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.pd{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5}
-.pa{font-family:'DM Serif Display',serif;font-size:38px;color:var(--navy);line-height:1}
-.pp{font-size:12px;color:var(--muted);margin-bottom:20px;margin-top:3px}
-.pfs{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
-.pf{font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
-.pf::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0}
-.pb{display:block;text-align:center;padding:12px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
-.pb-o{border:1px solid var(--border);color:var(--navy);background:white}
-.pb-o:hover{border-color:var(--teal);color:var(--teal)}
-.pb-t{background:var(--teal);color:white}
-.pb-t:hover{background:var(--teal2)}
+/* FAQ */
+.faq{background:var(--off);padding:56px 5%}
+.faq-inner{max-width:620px;margin:0 auto}
+.faq-title{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,32px);color:var(--navy);text-align:center;margin-bottom:28px}
+.fi{border-bottom:1px solid var(--border);padding:16px 0;cursor:pointer}
+.fq{font-size:13.5px;font-weight:600;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:10px}
+.fa{font-size:13px;color:var(--muted);line-height:1.7;margin-top:10px;display:none}
+.fi.open .fa{display:block}
+.fi.open .arr{transform:rotate(180deg)}
+.arr{color:var(--teal);flex-shrink:0;transition:transform .2s}
 
-.demo-s{background:var(--off)}
-.demo-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:52px;align-items:start}
-.demo-info h3{font-size:18px;font-weight:700;color:var(--navy);margin-bottom:10px}
-.demo-info p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:20px}
-.demo-detail{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--muted);margin-bottom:10px}
-.demo-detail strong{color:var(--navy);display:block}
-.demo-form{background:white;border-radius:12px;padding:28px;border:1px solid var(--border)}
-.fg{margin-bottom:14px}
-.fg label{display:block;font-size:10.5px;font-weight:700;color:var(--navy);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px}
-.fc{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'Manrope',sans-serif;color:var(--text);background:white;transition:border-color .15s}
-.fc:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,151,167,0.1)}
-textarea.fc{resize:vertical;min-height:80px}
-select.fc{cursor:pointer}
-.submit-btn{width:100%;padding:13px;background:var(--teal);color:white;border:none;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Manrope',sans-serif;margin-top:4px;transition:all .2s}
-.submit-btn:hover{background:var(--teal2)}
+/* CTA */
+.cta-sec{background:var(--teal);padding:52px 5%;text-align:center}
+.cta-sec h2{font-family:'DM Serif Display',serif;font-size:clamp(22px,3vw,34px);color:white;margin-bottom:10px}
+.cta-sec p{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:24px}
+.cta-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.bw{background:white;color:var(--teal);padding:13px 26px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none}
+.bw:hover{background:var(--off)}
+.bow{background:transparent;color:white;padding:13px 26px;border-radius:7px;font-size:13px;font-weight:600;text-decoration:none;border:2px solid rgba(255,255,255,0.35)}
+.bow:hover{border-color:white}
 
-.iadm-bar{background:var(--navy2);padding:40px 6%;text-align:center;border-top:1px solid rgba(0,151,167,0.1)}
-.iadm-inner{display:inline-flex;align-items:center;gap:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.15);padding:16px 28px;border-radius:12px}
-.iadm-img{height:36px;object-fit:contain}
-.iadm-div{width:1px;height:34px;background:rgba(255,255,255,0.1)}
-.iadm-info strong{display:block;font-size:13px;color:white;font-weight:600}
-.iadm-info span{font-size:11px;color:rgba(255,255,255,0.28)}
-
-footer{background:var(--navy);padding:26px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid rgba(255,255,255,0.05)}
-.fl{font-size:12px;color:rgba(255,255,255,0.22)}
-.fl strong{color:rgba(255,255,255,0.45)}
-.flinks{display:flex;gap:20px}
-.flinks a{font-size:11.5px;color:rgba(255,255,255,0.22);text-decoration:none}
+/* IADM */
+.iadm{background:#162e35;padding:28px 5%;text-align:center;border-top:1px solid rgba(0,151,167,0.1)}
+.iadm-inner{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(0,151,167,0.14);padding:12px 22px;border-radius:10px}
+.iadm-img{height:32px;object-fit:contain}
+.iadm-div{width:1px;height:30px;background:rgba(255,255,255,0.1)}
+.iadm-info strong{display:block;font-size:12px;color:white;font-weight:600}
+.iadm-info span{font-size:10.5px;color:rgba(255,255,255,0.28)}
+footer{background:#162e35;padding:20px 5%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(255,255,255,0.05)}
+.fl{font-size:11px;color:rgba(255,255,255,0.22)}
+.fl strong{color:rgba(255,255,255,0.4)}
+.flinks{display:flex;gap:16px}
+.flinks a{font-size:11px;color:rgba(255,255,255,0.22);text-decoration:none}
 .flinks a:hover{color:var(--teal2)}
 
-@media(max-width:900px){
-  .hero-inner,.value-grid,.mod-grid,.report-inner,.pricing-grid,.demo-inner{grid-template-columns:1fr}
-  .nav-links{display:none}
-  .hero{padding-top:100px}
+.prozess{background:white;padding:64px 5%}
+.prozess-inner{max-width:900px;margin:0 auto}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:44px;position:relative}
+.timeline::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--teal),var(--teal2));z-index:0}
+.tl-item{display:grid;grid-template-columns:60px 1fr;gap:24px;padding-bottom:40px;position:relative;z-index:1}
+.tl-item:last-child{padding-bottom:0}
+.tl-circle{width:58px;height:58px;border-radius:50%;background:var(--navy);border:2.5px solid var(--teal);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;position:relative;z-index:2}
+.tl-content{padding-top:10px}
+.tl-time{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.tl-title{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:6px;font-family:'DM Serif Display',serif}
+.tl-desc{font-size:13px;color:var(--muted);line-height:1.7}
+.tl-tag{display:inline-block;font-size:11px;font-weight:700;color:var(--teal);background:rgba(0,151,167,0.08);padding:3px 10px;border-radius:6px;margin-top:8px}
+.auto-box{background:#1a3a42;border-radius:14px;padding:28px 32px;margin-top:44px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.auto-item{text-align:center;padding:16px}
+.auto-icon{font-size:28px;margin-bottom:10px}
+.auto-title{font-size:13px;font-weight:700;color:white;margin-bottom:6px}
+.auto-desc{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.55}
+
+@media(max-width:860px){
+  .hero-inner,.how-grid,.get-grid,.price-grid,.auto-box{grid-template-columns:1fr}
+  .timeline::before{left:22px}
+  .tl-circle{width:46px;height:46px;font-size:16px}
+  .nav-contact{display:none}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTY4IiBoZWlnaHQ9IjQ2IiB2aWV3Qm94PSIwIDAgMTY4IDQ2IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNyAzLjUgTDI5IDggTDI5IDIwIEMyOSAyNy41IDIzIDMyLjUgMTcgMzQuNSBDMTEgMzIuNSA1IDI3LjUgNSAyMCBMNSA4IFoiIGZpbGw9InJnYmEoMCwxNTEsMTY3LDAuMTIpIiBzdHJva2U9IiMwMDk3QTciIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPGxpbmUgeDE9IjkiIHkxPSIxNSIgeDI9IjI1IiB5Mj0iMTUiIHN0cm9rZT0iIzAwOTdBNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI5IiB5MT0iMjAuNSIgeDI9IjI1IiB5Mj0iMjAuNSIgc3Ryb2tlPSIjMDBCQ0Q0IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjkiIHkxPSIyNiIgeDI9IjIxIiB5Mj0iMjYiIHN0cm9rZT0icmdiYSgwLDE4OCwyMTIsMC40KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjM3IiB5PSIyNyIgZm9udC1mYW1pbHk9Ik1hbnJvcGUsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIxOSIgZmlsbD0id2hpdGUiIGxldHRlci1zcGFjaW5nPSItMC40Ij5Hb3Y8dHNwYW4gZmlsbD0iIzAwQkNENCI+TGF5ZXI8L3RzcGFuPjwvdGV4dD4KPC9zdmc+" alt="GovLayer"></a>
-  <div class="nav-links">
-    <a href="#value">How It Helps</a>
-    <a href="#modules">Modules</a>
-    <a href="#report">The Report</a>
-    <a href="#pricing">Pricing</a>
-    <a href="https://aslannurguel-maker.github.io/IADM-AI-Governance-Check/iadm-governance-hub.html" target="_blank">Try Demo</a><a href="https://calendly.com/YOUR-LINK" target="_blank">Book a Consultation</a>
+  <a href="#"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQyIiB2aWV3Qm94PSIwIDAgMTYwIDQyIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Ik0xNyAzLjUgTDI5IDggTDI5IDIwIEMyOSAyNy41IDIzIDMyLjUgMTcgMzQuNSBDMTEgMzIuNSA1IDI3LjUgNSAyMCBMNSA4IFoiIGZpbGw9InJnYmEoMCwxNTEsMTY3LDAuMTIpIiBzdHJva2U9IiMwMDk3QTciIHN0cm9rZS13aWR0aD0iMS41Ii8+CiAgPGxpbmUgeDE9IjkiIHkxPSIxNSIgeDI9IjI1IiB5Mj0iMTUiIHN0cm9rZT0iIzAwOTdBNyIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxsaW5lIHgxPSI5IiB5MT0iMjAuNSIgeDI9IjI1IiB5Mj0iMjAuNSIgc3Ryb2tlPSIjMDBCQ0Q0IiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjkiIHkxPSIyNiIgeDI9IjIxIiB5Mj0iMjYiIHN0cm9rZT0icmdiYSgwLDE4OCwyMTIsMC40KSIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDx0ZXh0IHg9IjM3IiB5PSIyNyIgZm9udC1mYW1pbHk9Ik1hbnJvcGUsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjgwMCIgZm9udC1zaXplPSIyMCIgZmlsbD0id2hpdGUiIGxldHRlci1zcGFjaW5nPSItMC40Ij5Hb3Y8dHNwYW4gZmlsbD0iIzAwQkNENCI+TGF5ZXI8L3RzcGFuPjwvdGV4dD4KPC9zdmc+" alt="GovLayer"></a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="#preise" class="nav-cta">
+      <span data-lang-inline="de" class="active">Jetzt starten</span>
+      <span data-lang-inline="en">Get Started</span>
+    </a>
   </div>
-  <div style="display:flex;gap:10px"><a href="https://aslannurguel-maker.github.io/IADM-AI-Governance-Check/iadm-governance-hub.html" target="_blank" class="nav-cta" style="background:transparent;border:1px solid rgba(0,151,167,0.5)">Try Demo</a><a href="https://calendly.com/YOUR-LINK" target="_blank" class="nav-cta">Book a Consultation</a></div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-grid-bg"></div>
   <div class="hero-inner">
     <div>
-      <div class="hero-tag">EU AI Act Compliance</div>
-      <h1>Your organisation uses AI.<br>Can you <em>prove</em> you comply?</h1>
-      <p class="hero-sub">GovLayer helps organisations across Europe document their AI systems, close compliance gaps, and produce the evidence the EU AI Act requires.</p>
-      <div class="hero-actions">
-        <a href="https://aslannurguel-maker.github.io/IADM-AI-Governance-Check/iadm-governance-hub.html" target="_blank" class="btn-teal">Try the Demo</a>
-        <a href="https://calendly.com/YOUR-LINK" target="_blank" class="btn-ghost">Book a Consultation</a>
+      <!-- DE -->
+      <div data-lang="de" class="active">
+        <div class="hero-tag">Unsere Lösung · Nachweispflicht nach EU KI-Gesetz</div>
+        <h1>Ihr Nachweis der<br><em>KI-Rechtskonformität.</em></h1>
+        <p class="hero-sub">Unsere Lösung prüft jeden Monat ob Ihr Unternehmen die Pflichten des EU KI-Gesetzes erfüllt und erstellt automatisch alle erforderlichen Nachweise.</p>
+        <div class="hero-points">
+          <div class="hero-point"><span>✓</span>Einmal einrichten, dauerhaft abgesichert</div>
+          <div class="hero-point"><span>✓</span>Monatlicher Statusbericht automatisch</div>
+          <div class="hero-point"><span>✓</span>Kostenlose Einrichtung inklusive</div>
+        </div>
+        <div class="hero-actions">
+          <a href="#preise" class="btn-teal">Jetzt starten</a>
+          <a href="#wie" class="btn-ghost">So funktioniert es</a>
+        </div>
       </div>
-      <div class="hero-proof">
-        <div class="hero-proof-item"><span>Aug 2026</span> High-Risk AI deadline</div>
-        <div class="hero-proof-item"><span>€15M</span> max fine for non-compliance</div>
-        <div class="hero-proof-item"><span>12</span> compliance modules</div>
+      <!-- EN -->
+      <div data-lang="en">
+        <div class="hero-tag">EU AI Act Compliance</div>
+        <h1>We keep your business<br><em>compliant.</em></h1>
+        <p class="hero-sub">Monthly. Automatic. Without you having to worry about it.</p>
+        <div class="hero-points">
+          <div class="hero-point"><span>✓</span>Set up once, protected permanently</div>
+          <div class="hero-point"><span>✓</span>Know your exact compliance status every month</div>
+          <div class="hero-point"><span>✓</span>No legal or technical expertise needed</div>
+        </div>
+        <div class="hero-actions">
+          <a href="#preise" class="btn-teal">Get Started</a>
+          <a href="#wie" class="btn-ghost">How It Works</a>
+        </div>
       </div>
     </div>
-    <div class="hv">
-      <div class="hv-header">
+
+    <!-- STATUS CARD -->
+    <div class="status-card">
+      <div class="sc-top">
         <div>
-          <div class="hv-org">Organisation</div>
-          <div class="hv-name">Müller &amp; Partner GmbH</div>
+          <div class="sc-lbl">Rechtsstatus</div>
+          <div class="sc-org">Müller und Partner GmbH</div>
         </div>
-        <div class="hv-score-wrap">
-          <div class="hv-score">67%</div>
-          <div class="hv-score-label">Compliance Score</div>
-        </div>
-      </div>
-      <div class="hv-report">
-        <div class="hv-report-title">AI Act Compliance Report</div>
-        <div class="hv-report-items">
-          <div class="hv-ri"><div class="dot dg"></div>AI System Inventory — Complete</div>
-          <div class="hv-ri"><div class="dot dg"></div>Risk Classification — Complete</div>
-          <div class="hv-ri"><div class="dot da"></div>Bias Check Protocol — In Progress</div>
-          <div class="hv-ri"><div class="dot da"></div>Technical Documentation — In Progress</div>
-          <div class="hv-ri"><div class="dot dr"></div>Transparency Notices — Missing</div>
-          <div class="hv-ri"><div class="dot dg"></div>Art. 4 Training Records — Complete</div>
+        <div>
+          <div class="sc-score">87%</div>
+          <div class="sc-score-sub">rechtskonform</div>
         </div>
       </div>
-      <div class="hv-bars">
-        <div><div class="hv-bl"><span>AI System Register</span><span style="color:var(--teal2)">90%</span></div><div class="hv-track"><div class="hv-fill ft" style="width:90%"></div></div></div>
-        <div><div class="hv-bl"><span>Bias Monitoring (Art. 9/10)</span><span style="color:var(--red)">40%</span></div><div class="hv-track"><div class="hv-fill fr" style="width:40%"></div></div></div>
-        <div><div class="hv-bl"><span>Deployer Duties (Art. 26)</span><span style="color:var(--amber)">50%</span></div><div class="hv-track"><div class="hv-fill fa" style="width:50%"></div></div></div>
+      <div class="sc-email">
+        <div class="sc-email-lbl">
+          <span data-lang-inline="de" class="active">Ihr monatlicher Statusbericht</span>
+          <span data-lang-inline="en">Your monthly email</span>
+        </div>
+        <div class="sc-email-text">
+          <span data-lang-inline="de" class="active">Alles in Ordnung. Ein Punkt offen: Schulungsnachweis für 2 Mitarbeitende fehlt noch. <b>Ein Klick zur Lösung.</b></span>
+          <span data-lang-inline="en">All good. One item needs your attention: Training certificate missing for 2 employees. <b>One click to fix it.</b></span>
+        </div>
       </div>
-      <button class="hv-download">📥 Download AI Act Compliance Report (PDF)</button>
+      <div class="sc-list">
+        <div class="sc-row done"><div class="dot dg"></div>
+          <span data-lang-inline="de" class="active">KI-Systeme dokumentiert</span>
+          <span data-lang-inline="en">AI systems documented</span>
+        </div>
+        <div class="sc-row done"><div class="dot dg"></div>
+          <span data-lang-inline="de" class="active">Risikoklasse bewertet</span>
+          <span data-lang-inline="en">Risk level assessed</span>
+        </div>
+        <div class="sc-row done"><div class="dot dg"></div>
+          <span data-lang-inline="de" class="active">Fairness-Prüfung bestanden</span>
+          <span data-lang-inline="en">Bias check passed</span>
+        </div>
+        <div class="sc-row doing"><div class="dot da"></div>
+          <span data-lang-inline="de" class="active">Schulungsnachweise: 3 von 5</span>
+          <span data-lang-inline="en">Training records: 3 of 5</span>
+        </div>
+      </div>
+      <button class="sc-btn">
+        <span data-lang-inline="de" class="active">📥 Nachweis herunterladen</span>
+        <span data-lang-inline="en">📥 Download Compliance Report</span>
+      </button>
     </div>
   </div>
 </section>
 
+<!-- TRUST -->
 <div class="trust">
-  <div class="trust-item">🏛️ EU AI Act 2024/1689</div>
-  <div class="trust-item">🎓 Powered by IADM Ltd</div>
-  <div class="trust-item">⚖️ Art. 4, 9, 10, 13, 26 Covered</div>
-  <div class="trust-item">🇪🇺 Built for European Organisations</div>
-  <div class="trust-item">🔒 GDPR Compliant</div>
+  <div class="trust-item">🏛️ EU KI-Gesetz 2024/1689</div>
+  <div class="trust-item">🎓 IADM Ltd · CPD-akkreditiert</div>
+  <div class="trust-item">⚖️ Art. 4, 9, 10, 13, 26</div>
+  <div class="trust-item">🔒 Datenschutzkonform</div>
 </div>
 
-<section id="value">
-  <div class="sl">Why GovLayer</div>
-  <div class="st">Three things you get that actually matter.</div>
-  <div class="value-grid">
-    <div class="val-card">
-      <div class="val-icon">📋</div>
-      <div class="val-title">Clarity on where you stand</div>
-      <div class="val-desc">Most organisations have no idea which of their AI tools are High Risk under the EU AI Act. GovLayer tells you within minutes, with the legal reference to back it up.</div>
-      <div class="val-highlight">Auto risk classification — Annex III</div>
-    </div>
-    <div class="val-card">
-      <div class="val-icon">⚖️</div>
-      <div class="val-title">Bias results you can act on</div>
-      <div class="val-desc">Upload a simple CSV from your HR system. GovLayer calculates your fairness metrics instantly and flags anything that falls below EU AI Act thresholds.</div>
-      <div class="val-highlight">AIR, DPD, EOD — Art. 9 and 10</div>
-    </div>
-    <div class="val-card">
-      <div class="val-icon">📁</div>
-      <div class="val-title">A report you can actually show</div>
-      <div class="val-desc">When a regulator, client, or auditor asks for your EU AI Act compliance evidence, you open GovLayer and download your AI Act Compliance Report. That is it.</div>
-      <div class="val-highlight">Full PDF export — all articles covered</div>
-    </div>
-  </div>
-</section>
-
-<section class="modules" id="modules">
-  <div class="sl">What is covered</div>
-  <div class="st">Every EU AI Act obligation, in one platform.</div>
-  <div class="ss">GovLayer covers all requirements that apply to organisations deploying AI systems in Europe.</div>
-  <div class="mod-grid">
-    <div class="mod"><div class="mod-icon">🗂️</div><div class="mod-title">AI System Register</div><div class="mod-art">Art. 11 + Annex III</div><div class="mod-desc">Document every AI tool and get automatic risk classification.</div></div>
-    <div class="mod"><div class="mod-icon">⚠️</div><div class="mod-title">Risk Classification</div><div class="mod-art">Art. 6</div><div class="mod-desc">High Risk, Limited Risk, or Minimal Risk — determined by use case.</div></div>
-    <div class="mod"><div class="mod-icon">🔍</div><div class="mod-title">Gap Analysis</div><div class="mod-art">Art. 9</div><div class="mod-desc">See what is compliant, what is missing, and what needs urgent action.</div></div>
-    <div class="mod"><div class="mod-icon">⚖️</div><div class="mod-title">Bias Check</div><div class="mod-art">Art. 9 and 10</div><div class="mod-desc">CSV upload, instant AIR, DPD, and EOD results with Pass or Fail.</div></div>
-    <div class="mod"><div class="mod-icon">🏛️</div><div class="mod-title">Governance and Oversight</div><div class="mod-art">Art. 14</div><div class="mod-desc">Assign responsible persons and document oversight procedures.</div></div>
-    <div class="mod"><div class="mod-icon">🤝</div><div class="mod-title">Vendor Assessment</div><div class="mod-art">Art. 25</div><div class="mod-desc">Track compliance enquiries to AI providers with documentation.</div></div>
-    <div class="mod"><div class="mod-icon">🎓</div><div class="mod-title">AI Literacy Tracking</div><div class="mod-art">Art. 4</div><div class="mod-desc">Staff training records with CPD-accredited IADM certificates.</div></div>
-    <div class="mod"><div class="mod-icon">👁️</div><div class="mod-title">Transparency Notices</div><div class="mod-art">Art. 13</div><div class="mod-desc">Generate notifications for AI use in decisions affecting individuals.</div></div>
-    <div class="mod"><div class="mod-icon">🏢</div><div class="mod-title">Deployer Obligations</div><div class="mod-art">Art. 26</div><div class="mod-desc">Work through your specific duties as an AI-deploying organisation.</div></div>
-    <div class="mod"><div class="mod-icon">📋</div><div class="mod-title">Technical Documentation</div><div class="mod-art">Art. 11</div><div class="mod-desc">Auto-generated documentation for each High-Risk AI system.</div></div>
-    <div class="mod"><div class="mod-icon">📄</div><div class="mod-title">AI Act Compliance Report</div><div class="mod-art">All Articles</div><div class="mod-desc">Your complete compliance evidence exported as a professional PDF.</div></div>
-    <div class="mod"><div class="mod-icon">📊</div><div class="mod-title">Compliance Dashboard</div><div class="mod-art">Real-time Score</div><div class="mod-desc">Live overview of your compliance score and open actions.</div></div>
-  </div>
-</section>
-
-<section class="report-section" id="report">
-  <div class="sl" style="color:var(--teal2)">AI Act Compliance Report</div>
-  <div class="st">One report. Everything a regulator needs to see.</div>
-  <div class="ss">At any point, you can download your AI Act Compliance Report — a structured PDF that documents your compliance status across all relevant EU AI Act articles.</div>
-  <div class="report-inner">
-    <div class="report-visual">
-      <div class="rv-header">
-        <div class="rv-title">AI Act Compliance Report</div>
-        <div class="rv-date">Generated 15 Jun 2026</div>
+<!-- PAIN -->
+<section style="background:linear-gradient(135deg,#1a3a42,#2a5a6a);padding:40px 5%">
+  <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:center">
+    <div style="text-align:center;padding:16px">
+      <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--teal2);font-weight:700;line-height:1">15 Mio. €</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px">
+        <span data-lang-inline="de" class="active">Maximales Bußgeld bei Verstößen</span>
+        <span data-lang-inline="en">Maximum fine for violations</span>
       </div>
-      <div class="rv-items">
-        <div class="rv-item"><div class="rv-item-left">🗂️ AI System Inventory</div><span class="rv-badge rb-done">Complete</span></div>
-        <div class="rv-item"><div class="rv-item-left">⚠️ Risk Classification</div><span class="rv-badge rb-done">Complete</span></div>
-        <div class="rv-item"><div class="rv-item-left">📋 Technical Documentation</div><span class="rv-badge rb-prog">In Progress</span></div>
-        <div class="rv-item"><div class="rv-item-left">⚖️ Bias Check Protocol</div><span class="rv-badge rb-prog">In Progress</span></div>
-        <div class="rv-item"><div class="rv-item-left">👁️ Human Oversight Protocol</div><span class="rv-badge rb-done">Complete</span></div>
-        <div class="rv-item"><div class="rv-item-left">🤝 Vendor Responses</div><span class="rv-badge rb-prog">2 of 3</span></div>
-        <div class="rv-item"><div class="rv-item-left">🎓 Art. 4 Training Records</div><span class="rv-badge rb-done">Complete</span></div>
-        <div class="rv-item"><div class="rv-item-left">👁️ Transparency Notices</div><span class="rv-badge rb-miss">Missing</span></div>
-      </div>
-      <button class="rv-download">📥 Download AI Act Compliance Report (PDF)</button>
     </div>
-    <div class="report-text">
-      <h3>The document regulators actually ask for.</h3>
-      <p>When authorities, clients, or partners ask for proof of your EU AI Act compliance, this is what you show them. Not a checklist. A structured, professional report covering every relevant article.</p>
-      <p>GovLayer builds the report as you work through the platform. When you are ready, one click generates the full PDF.</p>
-      <div class="report-items">
-        <div class="report-item">AI system inventory with risk classification</div>
-        <div class="report-item">Bias check results with threshold assessment</div>
-        <div class="report-item">Human oversight and governance documentation</div>
-        <div class="report-item">Staff AI literacy certificates (Art. 4)</div>
-        <div class="report-item">Vendor compliance declarations</div>
-        <div class="report-item">Transparency notice log (Art. 13)</div>
-        <div class="report-item">Gap analysis with remediation status</div>
+    <div style="text-align:center;padding:16px;border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08)">
+      <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--teal2);font-weight:700;line-height:1">Aug. 2026</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px">
+        <span data-lang-inline="de" class="active">Pflichtfrist für Hochrisiko-KI</span>
+        <span data-lang-inline="en">Deadline for High-Risk AI</span>
+      </div>
+    </div>
+    <div style="text-align:center;padding:16px">
+      <div style="font-family:'DM Serif Display',serif;font-size:38px;color:var(--teal2);font-weight:700;line-height:1">20 Min.</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px">
+        <span data-lang-inline="de" class="active">Bis Sie abgesichert sind</span>
+        <span data-lang-inline="en">Until you are protected</span>
       </div>
     </div>
   </div>
 </section>
 
-<section id="pricing">
-  <div class="sl">Pricing</div>
-  <div class="st">Straightforward pricing.</div>
-  <div class="ss">Book a free demo first. No credit card required until you are ready to subscribe.</div>
-  <div class="pricing-grid">
-    <div class="pc">
-      <div class="pn">Starter</div>
-      <div class="pd">For small organisations with up to 3 AI systems.</div>
-      <div class="pa">€69</div><div class="pp">per month</div>
-      <ul class="pfs">
-        <li class="pf">Up to 3 AI systems</li>
-        <li class="pf">Gap Analysis and Bias Check</li>
-        <li class="pf">AI Act Compliance Report (PDF)</li>
-        <li class="pf">1 user account</li>
-      </ul>
-      <a href="https://calendly.com/YOUR-LINK" target="_blank" class="pb pb-o">Book a Consultation</a>
+<!-- SO FUNKTIONIERT ES -->
+<section style="background:var(--off);padding:56px 5%">
+  <div style="max-width:900px;margin:0 auto">
+
+    <div data-lang="de" class="active">
+      <div class="s-tag" style="text-align:center">Ihr Einstieg</div>
+      <h2 class="s-title" style="text-align:center;margin-bottom:10px">Unser Experte richtet alles ein.<br>Sie behalten jederzeit den Überblick.</h2>
+      <p style="font-size:14px;color:var(--muted);text-align:center;margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto">Ein KI-Governance-Experte aus unserem Team übernimmt die vollständige Einrichtung Ihres Kontos. Danach haben Sie jederzeit Einsicht in Ihren aktuellen Stand und können neue KI-Systeme selbst eintragen.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px">
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">🛠️</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">Einrichtung durch uns</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">Unser Experte richtet Ihr Konto vollständig ein. Sie müssen nichts vorbereiten.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">🔍</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">Transparenter Zugang</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">Sie sehen jederzeit wo Sie stehen, was offen ist und wo Handlungsbedarf besteht.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">➕</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">Sie bleiben aktiv</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">Neue KI-Systeme tragen Sie selbst ein. GovLayer bewertet und aktualisiert automatisch.</div>
+        </div>
+      </div>
+
+      <div style="background:#1a3a42;border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:15px;font-weight:700;color:white;margin-bottom:5px">Monatliche Mitgliedschaft. Einrichtung inklusive.</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.45)">Kein Einrichtungsaufwand für Sie. Keine versteckten Kosten. Jederzeit kündbar.</div>
+        </div>
+        <a href="#preise" style="background:var(--teal);color:white;padding:12px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap">Jetzt anfragen</a>
+      </div>
     </div>
-    <div class="pc feat">
-      <div class="fp">Most Popular</div>
-      <div class="pn">Business</div>
-      <div class="pd">For organisations with multiple AI systems and team members.</div>
-      <div class="pa">€149</div><div class="pp">per month</div>
-      <ul class="pfs">
-        <li class="pf">Unlimited AI systems</li>
-        <li class="pf">All Starter features</li>
-        <li class="pf">Article 4 Literacy Tracking</li>
-        <li class="pf">Vendor Assessment Module</li>
-        <li class="pf">5 user accounts</li>
-      </ul>
-      <a href="https://calendly.com/YOUR-LINK" target="_blank" class="pb pb-t">Book a Consultation</a>
+
+    <div data-lang="en">
+      <div class="s-tag" style="text-align:center">Getting started</div>
+      <h2 class="s-title" style="text-align:center;margin-bottom:10px">Our expert sets everything up.<br>You stay in control at all times.</h2>
+      <p style="font-size:14px;color:var(--muted);text-align:center;margin-bottom:36px;max-width:540px;margin-left:auto;margin-right:auto">An AI governance expert from our team handles the complete setup of your account. After that, you have full visibility into your current status and can add new AI systems yourself at any time.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px">
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">🛠️</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">Setup by us</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">Our expert sets up your account completely. Nothing for you to prepare.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">🔍</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">Full transparency</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">You see at any time where you stand, what is open, and where action is needed.</div>
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center">
+          <div style="font-size:24px;margin-bottom:10px">➕</div>
+          <div style="font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px">You stay active</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.55">Add new AI systems yourself. GovLayer assesses and updates automatically.</div>
+        </div>
+      </div>
+
+      <div style="background:#1a3a42;border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div style="font-size:15px;font-weight:700;color:white;margin-bottom:5px">Monthly membership. Setup included.</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.45)">No setup effort for you. No hidden costs. Cancel any time.</div>
+        </div>
+        <a href="#preise" style="background:var(--teal);color:white;padding:12px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap">Get in touch</a>
+      </div>
     </div>
-    <div class="pc">
-      <div class="pn">Pro</div>
-      <div class="pd">For larger organisations needing full compliance support.</div>
-      <div class="pa">€299</div><div class="pp">per month</div>
-      <ul class="pfs">
-        <li class="pf">Everything in Business</li>
-        <li class="pf">10 user accounts</li>
-        <li class="pf">Quarterly IADM Review Call</li>
-        <li class="pf">Priority support</li>
-        <li class="pf">Custom onboarding</li>
-      </ul>
-      <a href="https://calendly.com/YOUR-LINK" target="_blank" class="pb pb-o">Book a Consultation</a>
+
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="wie">
+  <div class="how-inner">
+    <div data-lang="de" class="active">
+      <div class="s-tag">So funktioniert es</div>
+      <h2 class="s-title">Einmal einrichten. Wir erledigen den Rest.</h2>
+    </div>
+    <div data-lang="en">
+      <div class="s-tag">How It Works</div>
+      <h2 class="s-title">Set up once. We handle the rest.</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-icon">🗂️</div>
+        <div data-lang="de" class="active">
+          <div class="how-title">KI-Tools eintragen</div>
+          <div class="how-desc">Sie tragen einmalig ein welche KI-Tools Ihr Unternehmen nutzt. Dauert 10 Minuten.</div>
+        </div>
+        <div data-lang="en">
+          <div class="how-title">Register your AI tools</div>
+          <div class="how-desc">You enter which AI tools your company uses. Takes 10 minutes.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-icon">⚡</div>
+        <div data-lang="de" class="active">
+          <div class="how-title">Wir übernehmen</div>
+          <div class="how-desc">Wir bewerten das Risiko, erstellen alle Dokumente und prüfen monatlich ob alles aktuell ist.</div>
+        </div>
+        <div data-lang="en">
+          <div class="how-title">GovLayer takes over</div>
+          <div class="how-desc">We assess the risk, create all documents, and check monthly that everything stays current.</div>
+        </div>
+      </div>
+      <div class="how-card featured">
+        <div class="how-num">03</div>
+        <div class="how-icon">📧</div>
+        <div data-lang="de" class="active">
+          <div class="how-title">Monatliche Statusmeldung</div>
+          <div class="how-desc">Sie bekommen eine E-Mail: Alles in Ordnung, oder: Das müssen Sie jetzt tun. Klar. Konkret. Umsetzbar.</div>
+        </div>
+        <div data-lang="en">
+          <div class="how-title">Monthly status update</div>
+          <div class="how-desc">You receive one email: All good, or: Here is what you need to do. Clear. Concrete. Actionable.</div>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-icon">📁</div>
+        <div data-lang="de" class="active">
+          <div class="how-title">Nachweis jederzeit abrufbar</div>
+          <div class="how-desc">Ihr vollständiger Rechtsnachweis steht jederzeit zum Download bereit. Für Kunden, Prüfer oder Behörden.</div>
+        </div>
+        <div data-lang="en">
+          <div class="how-title">Evidence always ready</div>
+          <div class="how-desc">Your full Compliance Report is available for download at any time. For clients, auditors, or regulators.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="demo-s" id="demo">
-  <div class="sl">Get Started</div>
-  <div class="st">Two ways to explore GovLayer.</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px">
-    <div style="background:white;border:1px solid var(--border);border-radius:14px;padding:36px;text-align:center">
-      <div style="font-size:36px;margin-bottom:16px">🖥️</div>
-      <div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:10px">Try the Interactive Demo</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;max-width:320px;margin-left:auto;margin-right:auto">Explore the platform yourself. Click through all modules, see how compliance is assessed, and get a feel for the interface. No sign-up required.</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;text-align:left;max-width:280px;margin-left:auto;margin-right:auto">
-        <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>All 12 modules visible</div>
-        <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>No sign-up needed</div>
-        <div style="font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px"><span style="color:var(--teal);font-weight:700">✓</span>Available immediately</div>
-        <div style="font-size:12px;color:var(--red);display:flex;align-items:center;gap:7px"><span style="font-weight:700">✗</span>No upload or download in demo</div>
-      </div>
-      <a href="https://aslannurguel-maker.github.io/IADM-AI-Governance-Check/iadm-governance-hub.html" target="_blank" style="display:block;background:var(--teal);color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s">Try the Demo Now</a>
+<!-- WHAT YOU GET -->
+<section class="get">
+  <div class="get-inner">
+    <div data-lang="de" class="active">
+      <div class="s-tag">Was enthalten ist</div>
+      <h2 class="s-title">Alles was das Gesetz verlangt.</h2>
     </div>
-    <div style="background:var(--navy);border:1px solid rgba(0,151,167,0.3);border-radius:14px;padding:36px;text-align:center">
-      <div style="font-size:36px;margin-bottom:16px">📞</div>
-      <div style="font-size:18px;font-weight:700;color:white;margin-bottom:10px">Book a Consultation</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:24px;max-width:320px;margin-left:auto;margin-right:auto">Talk to us directly. We will look at your specific AI systems, identify your compliance gaps, and show you exactly how GovLayer addresses them.</div>
-      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;text-align:left;max-width:280px;margin-left:auto;margin-right:auto">
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Tailored to your organisation</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>30 minutes, no obligation</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Clear next steps afterwards</div>
-        <div style="font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:7px"><span style="color:var(--teal2);font-weight:700">✓</span>Via Zoom or Teams</div>
+    <div data-lang="en">
+      <div class="s-tag">What is included</div>
+      <h2 class="s-title">Everything the law requires.</h2>
+    </div>
+    <div class="get-grid">
+      <div class="get-card">
+        <div class="get-icon">⚠️</div>
+        <div data-lang="de" class="active"><div class="get-title">Risikoklassifizierung</div><div class="get-desc">Automatisch für jedes KI-System.</div></div>
+        <div data-lang="en"><div class="get-title">Risk Classification</div><div class="get-desc">Automatic for every AI tool.</div></div>
+        <div class="get-art">Art. 6</div>
       </div>
-      <a href="https://calendly.com/YOUR-LINK" target="_blank" style="display:block;background:var(--teal);color:white;padding:13px 24px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s">Book a Consultation</a>
-      <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-top:12px">📧 info@govlayer.solutions</div>
+      <div class="get-card">
+        <div class="get-icon">🔍</div>
+        <div data-lang="de" class="active"><div class="get-title">Gap-Analyse</div><div class="get-desc">Was fehlt. Was dringend ist. Was erledigt ist.</div></div>
+        <div data-lang="en"><div class="get-title">Gap Analysis</div><div class="get-desc">What is missing. What is urgent. What is done.</div></div>
+        <div class="get-art">Art. 9</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">⚖️</div>
+        <div data-lang="de" class="active"><div class="get-title">Fairness-Prüfung</div><div class="get-desc">Daten hochladen, Ergebnis sofort.</div></div>
+        <div data-lang="en"><div class="get-title">Bias Check</div><div class="get-desc">Upload CSV, result immediately.</div></div>
+        <div class="get-art">Art. 9 und 10</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">📢</div>
+        <div data-lang="de" class="active"><div class="get-title">Mitarbeitermitteilungen</div><div class="get-desc">Automatisch generiert.</div></div>
+        <div data-lang="en"><div class="get-title">Employee Notices</div><div class="get-desc">Automatically generated.</div></div>
+        <div class="get-art">Art. 13</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">🎓</div>
+        <div data-lang="de" class="active"><div class="get-title">Schulungsnachweise</div><div class="get-desc">Hochladen und exportieren.</div></div>
+        <div data-lang="en"><div class="get-title">Training Records</div><div class="get-desc">Upload and export.</div></div>
+        <div class="get-art">Art. 4</div>
+      </div>
+      <div class="get-card">
+        <div class="get-icon">📁</div>
+        <div data-lang="de" class="active"><div class="get-title">Rechtsnachweis</div><div class="get-desc">Ein PDF. Jederzeit abrufbar.</div></div>
+        <div data-lang="en"><div class="get-title">Compliance Report</div><div class="get-desc">One PDF. Always available.</div></div>
+        <div class="get-art">Alle Artikel</div>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="iadm-bar">
-  <p style="font-size:11px;color:rgba(255,255,255,0.22);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px">Backed by expertise</p>
+<!-- PROZESS -->
+<section class="prozess" id="prozess">
+  <div class="prozess-inner">
+
+    <div data-lang="de" class="active">
+      <div class="s-tag">Wie wir arbeiten</div>
+      <h2 class="s-title">Von der Anmeldung bis zum Nachweis.</h2>
+      <p style="font-size:14px;color:var(--muted);margin-top:6px;margin-bottom:4px;max-width:560px">Das Einrichten dauert unter 20 Minuten. Danach läuft alles automatisch.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-circle">📝</div>
+          <div class="tl-content">
+            <div class="tl-time">Minute 1 bis 3</div>
+            <div class="tl-title">Konto erstellen</div>
+            <div class="tl-desc">Sie registrieren sich mit Ihrer Firmen-E-Mail. Kein Zahlungsmittel nötig für den Start.</div>
+            <div class="tl-tag">Kostenlos starten</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">🗂️</div>
+          <div class="tl-content">
+            <div class="tl-time">Minute 3 bis 12</div>
+            <div class="tl-title">KI-Systeme eintragen</div>
+            <div class="tl-desc">Sie geben an welche KI-Werkzeuge Ihr Unternehmen nutzt. GovLayer bewertet das Risiko sofort automatisch und zeigt Ihnen was zu tun ist.</div>
+            <div class="tl-tag">10 Minuten</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">⚡</div>
+          <div class="tl-content">
+            <div class="tl-time">Sofort danach</div>
+            <div class="tl-title">Erster Nachweis wird erstellt</div>
+            <div class="tl-desc">GovLayer erstellt automatisch Ihren ersten Rechtsnachweis. Sie sehen sofort wo Sie stehen und was noch fehlt.</div>
+            <div class="tl-tag">Vollständig automatisch</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">📧</div>
+          <div class="tl-content">
+            <div class="tl-time">Ab dem ersten Monat</div>
+            <div class="tl-title">Monatliche Statusmeldung</div>
+            <div class="tl-desc">Jeden Monat eine kurze Nachricht: Alles in Ordnung, oder: Dieser eine Punkt braucht Ihre Aufmerksamkeit. Sie müssen sich um nichts weiter kümmern.</div>
+            <div class="tl-tag">Kein Aufwand für Sie</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">📁</div>
+          <div class="tl-content">
+            <div class="tl-time">Jederzeit auf Abruf</div>
+            <div class="tl-title">Nachweis herunterladen</div>
+            <div class="tl-desc">Sobald ein Kunde, ein Auftraggeber oder eine Behörde fragt, laden Sie Ihren aktuellen Rechtsnachweis herunter. Ein Dokument. Alles drin.</div>
+            <div class="tl-tag">Ein Klick</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auto-box">
+        <div class="auto-item">
+          <div class="auto-icon">🔄</div>
+          <div class="auto-title">Automatische Aktualisierung</div>
+          <div class="auto-desc">Wenn das EU KI-Gesetz sich ändert, passt GovLayer Ihre Nachweise automatisch an.</div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">🔔</div>
+          <div class="auto-title">Aktive Erinnerungen</div>
+          <div class="auto-desc">Sie werden benachrichtigt bevor etwas abläuft oder nachgetragen werden muss.</div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">👩‍💼</div>
+          <div class="auto-title">Expertin auf Wunsch</div>
+          <div class="auto-desc">Bei Fragen steht Ihnen eine IADM-Expertin zur Verfügung. Persönlich. Auf Deutsch.</div>
+        </div>
+      </div>
+    </div>
+
+    <div data-lang="en">
+      <div class="s-tag">How We Work</div>
+      <h2 class="s-title">From sign-up to evidence.</h2>
+      <p style="font-size:14px;color:var(--muted);margin-top:6px;margin-bottom:4px;max-width:560px">Onboarding takes under 20 minutes. After that, everything runs automatically.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-circle">📝</div>
+          <div class="tl-content">
+            <div class="tl-time">Minutes 1 to 3</div>
+            <div class="tl-title">Create your account</div>
+            <div class="tl-desc">Register with your company email. No payment required to get started.</div>
+            <div class="tl-tag">Start for free</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">🗂️</div>
+          <div class="tl-content">
+            <div class="tl-time">Minutes 3 to 12</div>
+            <div class="tl-title">Register your AI systems</div>
+            <div class="tl-desc">Tell us which AI tools your company uses. GovLayer assesses the risk automatically and shows you what needs to be done.</div>
+            <div class="tl-tag">10 minutes</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">⚡</div>
+          <div class="tl-content">
+            <div class="tl-time">Immediately after</div>
+            <div class="tl-title">First report created</div>
+            <div class="tl-desc">GovLayer automatically creates your first Compliance Report. You see immediately where you stand and what is still missing.</div>
+            <div class="tl-tag">Fully automatic</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">📧</div>
+          <div class="tl-content">
+            <div class="tl-time">From month one</div>
+            <div class="tl-title">Monthly status update</div>
+            <div class="tl-desc">Every month one short message: All good, or: This one item needs your attention. Nothing else for you to do.</div>
+            <div class="tl-tag">Nothing to do</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-circle">📁</div>
+          <div class="tl-content">
+            <div class="tl-time">Available at any time</div>
+            <div class="tl-title">Download your report</div>
+            <div class="tl-desc">Whenever a client, partner or regulator asks, download your current Compliance Report. One document. Everything included.</div>
+            <div class="tl-tag">One click</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="auto-box">
+        <div class="auto-item">
+          <div class="auto-icon">🔄</div>
+          <div class="auto-title">Automatic updates</div>
+          <div class="auto-desc">When the EU AI Act changes, GovLayer updates your reports automatically.</div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">🔔</div>
+          <div class="auto-title">Active reminders</div>
+          <div class="auto-desc">You are notified before anything expires or needs to be updated.</div>
+        </div>
+        <div class="auto-item">
+          <div class="auto-icon">👩‍💼</div>
+          <div class="auto-title">Expert on request</div>
+          <div class="auto-desc">If you have questions, an IADM expert is available for you personally.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="preise">
+  <div data-lang="de" class="active">
+    <div class="s-tag">Preise</div>
+    <h2 class="s-title">Einfach. Transparent.</h2>
+    <p class="pricing-sub">Monatlich kündbar. Keine versteckten Kosten. Kein Fachwissen nötig.</p>
+  </div>
+  <div data-lang="en">
+    <div class="s-tag">Pricing</div>
+    <h2 class="s-title">Simple. Transparent.</h2>
+    <p class="pricing-sub">Cancel any time. No hidden costs. No expertise needed.</p>
+  </div>
+  <div class="price-grid">
+    <div class="price">
+      <div data-lang="de" class="active">
+        <div class="pname">Starter</div>
+        <div class="pamt">29 €</div>
+        <div class="pmo">pro Monat</div>
+        <div class="ptag">Bis 10 Mitarbeitende</div>
+        <ul class="pfeats">
+          <li class="pfeat">Bis zu 3 KI-Systeme</li>
+          <li class="pfeat">Monatliche Statusmeldung</li>
+          <li class="pfeat">Rechtsnachweis PDF</li>
+          <li class="pfeat">Bias-Check inklusive</li>
+        </ul>
+        <button class="pbtn pbo">Jetzt starten</button>
+      </div>
+      <div data-lang="en">
+        <div class="pname">Starter</div>
+        <div class="pamt">€29</div>
+        <div class="pmo">per month</div>
+        <div class="ptag">Up to 10 employees</div>
+        <ul class="pfeats">
+          <li class="pfeat">Up to 3 AI systems</li>
+          <li class="pfeat">Monthly status update</li>
+          <li class="pfeat">Compliance Report PDF</li>
+          <li class="pfeat">Bias check included</li>
+        </ul>
+        <button class="pbtn pbo">Get Started</button>
+      </div>
+    </div>
+    <div class="price feat">
+      <div class="pbadge">
+        <span data-lang-inline="de" class="active">Beliebteste</span>
+        <span data-lang-inline="en">Most Popular</span>
+      </div>
+      <div data-lang="de" class="active">
+        <div class="pname">Business</div>
+        <div class="pamt">69 €</div>
+        <div class="pmo">pro Monat</div>
+        <div class="ptag">Bis 50 Mitarbeitende</div>
+        <ul class="pfeats">
+          <li class="pfeat">Unbegrenzte KI-Systeme</li>
+          <li class="pfeat">Alles aus Starter</li>
+          <li class="pfeat">Schulungs-Tracking</li>
+          <li class="pfeat">Bis zu 5 Benutzer</li>
+          <li class="pfeat">Vierteljährlicher IADM-Call</li>
+        </ul>
+        <button class="pbtn pbt">Jetzt starten</button>
+      </div>
+      <div data-lang="en">
+        <div class="pname">Business</div>
+        <div class="pamt">€69</div>
+        <div class="pmo">per month</div>
+        <div class="ptag">Up to 50 employees</div>
+        <ul class="pfeats">
+          <li class="pfeat">Unlimited AI systems</li>
+          <li class="pfeat">Everything in Starter</li>
+          <li class="pfeat">Training tracking</li>
+          <li class="pfeat">Up to 5 users</li>
+          <li class="pfeat">Quarterly IADM call</li>
+        </ul>
+        <button class="pbtn pbt">Get Started</button>
+      </div>
+    </div>
+    <div class="price">
+      <div data-lang="de" class="active">
+        <div class="pname">Pro</div>
+        <div class="pamt">149 €</div>
+        <div class="pmo">pro Monat</div>
+        <div class="ptag">Bis 250 Mitarbeitende</div>
+        <ul class="pfeats">
+          <li class="pfeat">Alles aus Business</li>
+          <li class="pfeat">Bis zu 10 Benutzer</li>
+          <li class="pfeat">Monatlicher IADM-Call</li>
+          <li class="pfeat">Prioritäts-Support</li>
+        </ul>
+        <button class="pbtn pbo">Jetzt starten</button>
+      </div>
+      <div data-lang="en">
+        <div class="pname">Pro</div>
+        <div class="pamt">€149</div>
+        <div class="pmo">per month</div>
+        <div class="ptag">Up to 250 employees</div>
+        <ul class="pfeats">
+          <li class="pfeat">Everything in Business</li>
+          <li class="pfeat">Up to 10 users</li>
+          <li class="pfeat">Monthly IADM call</li>
+          <li class="pfeat">Priority support</li>
+        </ul>
+        <button class="pbtn pbo">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div data-lang="de" class="active">
+      <h2 class="faq-title">Häufige Fragen</h2>
+      <div class="fi open" onclick="this.classList.toggle('open')">
+        <div class="fq">Was genau passiert nach der Anmeldung? <span class="arr">▼</span></div>
+        <div class="fa">Sie tragen Ihre KI-Tools ein (10 Minuten), GovLayer bewertet alles automatisch und erstellt Ihren ersten Rechtsnachweis. Ab dann bekommen Sie monatlich eine E-Mail mit Ihrem aktuellen Status.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">Ich habe keine Ahnung vom EU KI-Gesetz. Ist das ein Problem? <span class="arr">▼</span></div>
+        <div class="fa">Nein. Genau dafür ist GovLayer da. Sie müssen kein einziges Gesetz lesen. GovLayer übersetzt alle Anforderungen in einfache Aufgaben und erledigt das Meiste automatisch.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">Was ist der Rechtsnachweis? <span class="arr">▼</span></div>
+        <div class="fa">Ein PDF-Dokument mit allen Nachweisen die ein Prüfer, Auditor oder Kunde von Ihnen verlangen würde. KI-Inventar, Risikobewertungen, Bias-Ergebnisse, Schulungsnachweise alles in einem Dokument.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">Kann ich jederzeit kündigen? <span class="arr">▼</span></div>
+        <div class="fa">Ja. Keine Mindestlaufzeit. Monatlich kündbar. Ihre Daten bleiben 30 Tage nach der Kündigung abrufbar.</div>
+      </div>
+    </div>
+    <div data-lang="en">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <div class="fi open" onclick="this.classList.toggle('open')">
+        <div class="fq">What happens after I sign up? <span class="arr">▼</span></div>
+        <div class="fa">You enter your AI tools (10 minutes), GovLayer assesses everything automatically and creates your first Compliance Report. From then on, you receive a monthly email with your current status.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">I know nothing about the EU AI Act. Is that a problem? <span class="arr">▼</span></div>
+        <div class="fa">No. That is exactly what GovLayer is for. You do not need to read a single law. GovLayer translates all requirements into simple tasks and handles most of it automatically.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">What is the Compliance Report? <span class="arr">▼</span></div>
+        <div class="fa">A PDF document with all the evidence a regulator, auditor, or client would ask for. AI inventory, risk assessments, bias results, training records all in one document.</div>
+      </div>
+      <div class="fi" onclick="this.classList.toggle('open')">
+        <div class="fq">Can I cancel at any time? <span class="arr">▼</span></div>
+        <div class="fa">Yes. No minimum term. Cancel monthly. Your data remains available for 30 days after cancellation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div data-lang="de" class="active">
+    <h2>Rechtssicher bleiben. Ohne Aufwand.</h2>
+    <p>Starten Sie heute. Erste Ergebnisse in 10 Minuten.</p>
+    <div class="cta-btns">
+      <a href="#" class="bw">Jetzt starten</a>
+      <a href="#" class="bow">Demo buchen</a>
+    </div>
+  </div>
+  <div data-lang="en">
+    <h2>Stay compliant. Without the effort.</h2>
+    <p>Start today. First results in 10 minutes.</p>
+    <div class="cta-btns">
+      <a href="#" class="bw">Get Started</a>
+      <a href="#" class="bow">Book a Demo</a>
+    </div>
+  </div>
+</section>
+
+<div class="iadm">
   <div class="iadm-inner">
     <img src="data:image/jpeg;base64,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trbXSOWyfTmSr5dNU36uts3C6lLHtEfCMAgZz6crrwvuMNmoDZmEtfkzFjASX5/4vMo2JpRIZBK8PPW7iOT7VyhqKiAOEM8sQd84MeRn6kzD4NlSUbWWXRrRtJptr1vf7EvqGuN+ncxkZrG0IMLeWA/zZXUqX3GTTU7rqxzT0zA0uaGuLc8+SwVDNAasPr5KksDcNfG7wmnsxld253Kmdb3UdNJVVDpHh0s1Q7JIHUB5lnNdET4bUpVadNK9suttyW+zvp26kjnl6GsDGQV0tJ0WBHFEwwFuO/Kw5rpqHTNNJQvMfFUPAJaCeHJOPcsCyqqmQmFlTM2I8iwPIafYvmZJDGIy9xYDkNzyB9Cw5kihsPJZTaaTT3b7J7/XUmc9dO3UlNQjgFNNHmSPgGHFwJJK69p4IbM80gqhJ8ocJTTRtc/keQ59mMKLGeYyCQzSF7eQdxHI9qQ1E8Dy+GeSJx63McQT9SznMfA2qajGS3K+mjab3+/6EsZOwXmrmZTyRzMtznSCVgBc7kQSASOYxlY+SvqavTxrJ3h1TT1Y6OThAIyM46v9clgzPOZHyGaQveMOdxHLh5z2riHvEZjD3cBOS3PLPoWMxup7HUbNtNrL7LeuzvbsZvV1VPJPTwvkLo+gZJw4/wCIjmVglye98hBe9ziBgEnPJcV5buyywWGWGoRpLkERFglBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREB//9k=" alt="IADM" class="iadm-img">
     <div class="iadm-div"></div>
     <div class="iadm-info">
-      <strong>GovLayer is a brand of IADM Ltd</strong>
-      <span>CPD Accredited · Member No. 021006 · iadm.academy</span>
+      <strong>GovLayer ist eine Marke der IADM Ltd</strong>
+      <span>CPD-akkreditiert · Mitglied Nr. 021006 · iadm.academy</span>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="fl"><strong>GovLayer.solutions</strong> — A brand of IADM Ltd · © 2026 All rights reserved</div>
+  <div class="fl"><strong>GovLayer.solutions</strong> · Eine Marke der IADM Ltd · © 2026</div>
   <div class="flinks">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Imprint</a>
+    <a href="#">Datenschutz</a>
+    <a href="#">Impressum</a>
     <a href="https://www.iadm.academy">IADM Academy</a>
   </div>
 </footer>
 
+<script>
+function setLang(lang) {
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang') === lang);
+  });
+  document.querySelectorAll('[data-lang-inline]').forEach(el => {
+    el.classList.toggle('active', el.getAttribute('data-lang-inline') === lang);
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+  });
+  document.documentElement.lang = lang;
+}
+document.querySelectorAll('.fi').forEach(i => i.addEventListener('click', () => i.classList.toggle('open')));
+</script>
 </body>
 </html>
