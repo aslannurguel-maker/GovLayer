@@ -870,6 +870,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
 }
 document.querySelectorAll('.fi').forEach(i => i.addEventListener('click', () => i.classList.toggle('open')));
+document.addEventListener('DOMContentLoaded', function() { setLang('en'); });
 </script>
 </body>
 </html>
