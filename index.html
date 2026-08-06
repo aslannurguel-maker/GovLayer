@@ -241,13 +241,13 @@ document.getElementById('iadmLogo').src = window.IADM_LOGO;
 document.getElementById('iadmTop').src = window.IADM_LOGO;
 document.getElementById('gateLogo').src = window.IADM_LOGO;
 /* access gate: code required once per browser */
-function gateHash(s){let x=7;for(const c of s.toUpperCase().trim()){x=(x*31+c.charCodeAt(0))>>>0}return x.toString(36)}
-const GATE_REF='ck72tp';
+function gateHash(s){s=String(s).replace(/[^a-z0-9]/gi,'').toLowerCase();let x=7;for(const c of s){x=(x*31+c.charCodeAt(0))>>>0}return x.toString(36)}
+const GATE_REF='1ymrlzh';
 function gateGo(){
   const v=document.getElementById('gateIn').value;
   const de=(localStorage.getItem('gl_lang')||'en')==='de';
   if(gateHash(v)===GATE_REF){localStorage.setItem('gl_gate',GATE_REF);document.getElementById('gate').hidden=true;}
-  else{document.getElementById('gateErr').textContent=de?'Code nicht erkannt. Den Code finden Sie in Section 12 des CAIO-Kurses.':'Code not recognised. You will find it in Section 12 of the CAIO course.';}
+  else{document.getElementById('gateErr').textContent=de?'Code nicht erkannt. Ihren Zugangscode finden Sie in Section 1 des CAIO-Kurses.':'Code not recognised. You will find your access code in Section 1 of the CAIO course.';}
 }
 if(localStorage.getItem('gl_gate')!==GATE_REF){
   document.getElementById('gate').hidden=false;
