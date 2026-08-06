@@ -243,15 +243,21 @@ document.getElementById('gateLogo').src = window.IADM_LOGO;
 /* access gate: code required once per browser */
 function gateHash(s){s=String(s).replace(/[^a-z0-9]/gi,'').toLowerCase();let x=7;for(const c of s){x=(x*31+c.charCodeAt(0))>>>0}return x.toString(36)}
 const GATE_REF='1ymrlzh';
+function lsGet(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function lsSet(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function gateGo(){
   const v=document.getElementById('gateIn').value;
-  const de=(localStorage.getItem('gl_lang')||'en')==='de';
-  if(gateHash(v)===GATE_REF){localStorage.setItem('gl_gate',GATE_REF);document.getElementById('gate').hidden=true;}
-  else{document.getElementById('gateErr').textContent=de?'Code nicht erkannt. Ihren Zugangscode finden Sie in Section 1 des CAIO-Kurses.':'Code not recognised. You will find your access code in Section 1 of the CAIO course.';}
+  const de=(lsGet('gl_lang')||'en')==='de';
+  if(gateHash(v)===GATE_REF){
+    document.getElementById('gate').hidden=true;
+    lsSet('gl_gate',GATE_REF);
+  } else {
+    document.getElementById('gateErr').textContent=de?'Code nicht erkannt. Ihren Zugangscode finden Sie in Section 1 des CAIO-Kurses.':'Code not recognised. You will find your access code in Section 1 of the CAIO course.';
+  }
 }
-if(localStorage.getItem('gl_gate')!==GATE_REF){
+if(lsGet('gl_gate')!==GATE_REF){
   document.getElementById('gate').hidden=false;
-  if((localStorage.getItem('gl_lang')||'en')==='de'){
+  if((lsGet('gl_lang')||'en')==='de'){
     document.getElementById('gateP').textContent='Geben Sie Ihren Zugangscode aus dem IADM-Certified-AI-Officer-Programm ein.';
     document.getElementById('gateBtn').textContent='Freischalten';
   }
