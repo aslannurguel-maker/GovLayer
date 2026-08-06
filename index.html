@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAEmklEQVR4nO3bvU5VURDFcT6klsKKDnvliTShIfoC0tLiC5DQmOATyQNgZ0UhtSFaTULmnOv5mr1nzcz6V4YIbLJ+Hu8997J/+u7T3z1WtgPvAzDfCKB4BFA8AigeAQTp+fqiydclgEA9X1+YQyCAgFlCIIDAWUAggARtgfDK+CzMsZcIDi9vZ30OrwBJm3tVIIDkTUEggCLtgkAAxdIQ+CCwWPrBYfkrQKtbrGgdXt6OPjMoewV4Obz8ee5Tp0hN/UzlAPzvX3wmCHN/hjIAllzqI0NYeub0ALb8Hx8NwppzpgVg+eAOHcKWc6UD0PJRPRoEi3OkAdDz6Zw3BMvvGx6A5/P43hBafJ/9qL8YgngDB+W/hiWFA4A4vC4ShDAAIgyviwABHkDE4XXIEGABZBhehwgBDkDG4XVIEGAAVBhehwDBHUDF4XWeENwAcPhhHhC6A+Dw0/WE0A0Ah19eDwjNAXD47bWE0AwAh7cvxItBHL59lhDMAHD4/llA2AyAw/u3BQKvAIGDuALoCKF9kI8BdIRgX4hnATpC2F7I+wA6VAjnJ8eP3379fuN9jrFS3AnUoUA4Pzl+1B9DgZDytQCdF4Sx4XVeEEq8GqjrBWHO8LpeEEq+H0DXCsKa4XWtIPAdQSNZQbAYXmcFAWF4CQ6AtBZCi+F1ayEgDS/BApDmQugxvG4uBMThJXgA0i4IHsPrdkFAHl4KA0ASCAjD6wRChOGlcL8ejji8JGe729uDuKE0pzBXgI/fv8AOv6u7D1/hIcADiDi8DhkCLIAMw+sQIcAByDi8DgkCDIAKw+sQILgDqDi8zhOCGwAOP8wDQncAHH66nhC6AeDwy+sBoTkADr+9lhCaAeDw9rWAYA6Aw7fPEoIZAA7fPwsImwFweP+2QOAVIHAQVwAdIbQP8jGAjhDsC/EsQEcI2wt5H0CHCuHq7PTo6sfPP97nGCvFnUAdCoSrs9OjwcdAIKR8LUDnBWFs+MHfcYJQ4tVAXS8Ic4YffE4nCCXfD6BrBWHN8IOv0QgC3xE0khUEi+EHX9MIAsLwEhwAaS2EFsMPvsdKCEjDS7AApLkQegw/+J4zISAOL8EDkHZB8Bh+cIYdEJCHl8IAkAQCwvA6gRBheCncL4ciDi/J2e68D7KgMFeAh/ubJ+8zLO3t+8+vvc8wFTyAiMPrkCHAAsgwvA4RAhyAjMPrkCDAAKgwvA4BgjuAisPrPCG4AeDwwzwgdAfA4afrCaEbAA6/vB4QmgPg8NtrCaEZAA5vXwsI5gA4fPssIZgB4PD9s4CwGQCH928LBF4BAgdxBdARQvsgHwPoCMG+EM8CdISwvZD3AXSEsLwUdwJ1hDBdytcCdIQwrMSrgTpCKPp+AF1FCHxH0EgVICAML8EBkDJCQBpeggUgZYCAOLwED0CKCAF5eCkMACkChAjDS+EASIgQIg0vhQUgIUCIOLwUHoDkASHy8FIaAFIPCBmGl9IBkFpAyDS8lBaAZAEh4/BSegDSGgiZh5fKAJDmQKgwvFQOgDQGodLwUlkA0sP9zVPF4aXyAKp34H0A5hsBFI8AikcAxfsHHtC44/lvMdQAAAAASUVORK5CYII=">
 <title>GovLayer · EU AI Act Compliance Workspace · A brand of IADM</title>
 <meta name="description" content="GovLayer, the EU AI Act compliance learning workspace by IADM. Inventory, risk classification, gap analysis, bias check, training records, transparency notices and compliance reporting.">
 <style>
@@ -191,6 +192,7 @@ tr:hover td{background:#FAFBFE}
     <h1 id="topTitle">Dashboard</h1>
     <span class="org" id="topOrg"></span>
     <span class="sp"></span>
+    <img id="iadmTop" alt="IADM" style="height:34px;border-radius:6px">
     <span class="pill" data-i="learner">CAIO Learning Edition</span>
     <div class="lang">
       <button id="langEN" class="on" onclick="setLang('en')">EN</button>
@@ -205,6 +207,7 @@ window.IADM_LOGO = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXkAAADDCAYAAA
 </script>
 <script>
 document.getElementById('iadmLogo').src = window.IADM_LOGO;
+document.getElementById('iadmTop').src = window.IADM_LOGO;
 
 /* ================= i18n ================= */
 const I = {
