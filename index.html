@@ -188,7 +188,7 @@ tr:hover td{background:#FAFBFE}
     <input id="gateIn" autocomplete="off" placeholder="ACCESS CODE" onkeydown="if(event.key==='Enter')gateGo()">
     <button class="btn btn-p" onclick="gateGo()" id="gateBtn">Unlock</button>
     <div class="gate-err" id="gateErr"></div>
-    <div class="gate-foot">A brand of IADM · CPD Member No. 021006<img id="gateLogo" alt="IADM"></div>
+    <div class="gate-foot">A brand of IADM · CPD Member No. 021006 · v3<img id="gateLogo" alt="IADM"></div>
   </div>
 </div>
 
@@ -255,6 +255,10 @@ function gateGo(){
     document.getElementById('gateErr').textContent=de?'Code nicht erkannt. Ihren Zugangscode finden Sie in Section 1 des CAIO-Kurses.':'Code not recognised. You will find your access code in Section 1 of the CAIO course.';
   }
 }
+try{
+  const qp=new URLSearchParams(location.search).get('access');
+  if(qp && gateHash(qp)===GATE_REF){ lsSet('gl_gate',GATE_REF); history.replaceState(null,'',location.pathname+location.hash); }
+}catch(e){}
 if(lsGet('gl_gate')!==GATE_REF){
   document.getElementById('gate').hidden=false;
   if((lsGet('gl_lang')||'en')==='de'){
