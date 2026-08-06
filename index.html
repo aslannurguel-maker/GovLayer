@@ -162,6 +162,7 @@ tr:hover td{background:#FAFBFE}
 
 /* ---------- access gate ---------- */
 .gate{position:fixed;inset:0;z-index:999;background:var(--navy);display:flex;align-items:center;justify-content:center;padding:20px}
+.gate[hidden]{display:none}
 .gate-card{background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.35);padding:34px 30px;max-width:420px;width:100%;text-align:center}
 .gate-card .gl-mark{width:52px;height:52px;margin:0 auto 10px;display:block}
 .gate-h{font-family:var(--disp);font-size:23px;color:var(--navy);margin-bottom:6px}
@@ -188,7 +189,7 @@ tr:hover td{background:#FAFBFE}
     <input id="gateIn" autocomplete="off" placeholder="ACCESS CODE" onkeydown="if(event.key==='Enter')gateGo()">
     <button class="btn btn-p" onclick="gateGo()" id="gateBtn">Unlock</button>
     <div class="gate-err" id="gateErr"></div>
-    <div class="gate-foot">A brand of IADM · CPD Member No. 021006 · v3<img id="gateLogo" alt="IADM"></div>
+    <div class="gate-foot">A brand of IADM · CPD Member No. 021006 · v4<img id="gateLogo" alt="IADM"></div>
   </div>
 </div>
 
